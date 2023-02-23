@@ -1,0 +1,1142 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f288d069a7a, pid=45215, tid=0x00007f2880c31700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_152-b16) (build 1.8.0_152-b16)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.152-b16 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# v  ~BufferBlob::jni_fast_GetLongField
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f289c35f800):  JavaThread "AWT-XAWT" daemon [_thread_in_native, id=45270, stack(0x00007f2880b31000,0x00007f2880c32000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000000
+
+Registers:
+RAX=0x00007f28a32ec400, RBX=0x00007f289c35f9f8, RCX=0x00007f28a32c71a0, RDX=0x0000000000000042
+RSP=0x00007f2880c30438, RBP=0x00007f2880c30460, RSI=0x0000000000000000, RDI=0x00007f289c35f9f8
+R8 =0x00007f289c35f800, R9 =0x0000000000000000, R10=0x000000000000000c, R11=0x00007f28a2d27f50
+R12=0x0000000000000000, R13=0x0000000000000000, R14=0x00007f2881a0d820, R15=0x00007f289c35f800
+RIP=0x00007f288d069a7a, EFLAGS=0x0000000000010246, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f2880c30438)
+0x00007f2880c30438:   00007f28817ec051 00007f288ac0f330
+0x00007f2880c30448:   0000000000000000 00007f288ac0f330
+0x00007f2880c30458:   00007f2880c30548 00007f27c800a3d0
+0x00007f2880c30468:   00007f28816ddf4d 00007f288ac0f330
+0x00007f2880c30478:   00007f2880c304a0 0000000000000000
+0x00007f2880c30488:   00007f28816d5973 00007f288ac0f330
+0x00007f2880c30498:   00007f28817e528f 00007f2880c30510
+0x00007f2880c304a8:   00007f288d017a34 00007f2880c30590
+0x00007f2880c304b8:   00007f288d478b94 00007f2880c30590
+0x00007f2880c304c8:   00007f288d462d2c 00007f2880c304d0
+0x00007f2880c304d8:   0000000000000000 00007f2880c30548
+0x00007f2880c304e8:   00007f288ac139c0 0000000000000000
+0x00007f2880c304f8:   00007f288ac0f330 0000000000000000
+0x00007f2880c30508:   00007f2880c30530 00007f2880c30590
+0x00007f2880c30518:   00007f288d007a90 000000071a397e58
+0x00007f2880c30528:   00007f288d011520 0000000000000000
+0x00007f2880c30538:   00007f2880c30590 00007f27c8003170
+0x00007f2880c30548:   000000071a60f800 00007f2880c30550
+0x00007f2880c30558:   00007f288abd357c 00007f2880c305d8
+0x00007f2880c30568:   00007f288abebc28 0000000000000000
+0x00007f2880c30578:   00007f288abd36b8 00007f2880c30530
+0x00007f2880c30588:   00007f2880c305d0 00007f2880c30620
+0x00007f2880c30598:   00007f288d0082bd 0000000000000000
+0x00007f2880c305a8:   000000071b39d810 000000071a892ac0
+0x00007f2880c305b8:   0000000000000000 0000000000000000
+0x00007f2880c305c8:   000000071a60f800 0000000000000000
+0x00007f2880c305d8:   000000071a3cf938 00007f2880c305e0
+0x00007f2880c305e8:   00007f288abd33bd 00007f2880c30630
+0x00007f2880c305f8:   00007f288abebc28 0000000000000000
+0x00007f2880c30608:   00007f288abd33c8 00007f2880c305d0
+0x00007f2880c30618:   00007f2880c30630 00007f2880c30678
+0x00007f2880c30628:   00007f288d008302 000000071a3cf938 
+
+Instructions: (pc=0x00007f288d069a7a)
+0x00007f288d069a5a:   00 00 00 00 00 00 44 8b 15 a1 24 2c 16 4c 8b ce
+0x00007f288d069a6a:   41 f6 c2 01 0f 85 2e 00 00 00 4d 33 ca 4d 33 ca
+0x00007f288d069a7a:   4d 8b 09 4c 8b da 49 c1 eb 02 4b 8b 04 19 49 bb
+0x00007f288d069a8a:   08 bf 32 a3 28 7f 00 00 4c 33 d8 4c 33 d8 45 3b 
+
+Register to memory mapping:
+
+RAX=0x00007f28a32ec400: <offset 0xf90400> in /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so at 0x00007f28a235c000
+RBX=0x00007f289c35f9f8 is an unknown value
+RCX=0x00007f28a32c71a0: <offset 0xf6b1a0> in /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so at 0x00007f28a235c000
+RDX=0x0000000000000042 is an unknown value
+RSP=0x00007f2880c30438 is pointing into the stack for thread: 0x00007f289c35f800
+RBP=0x00007f2880c30460 is pointing into the stack for thread: 0x00007f289c35f800
+RSI=0x0000000000000000 is an unknown value
+RDI=0x00007f289c35f9f8 is an unknown value
+R8 =0x00007f289c35f800 is a thread
+R9 =0x0000000000000000 is an unknown value
+R10=0x000000000000000c is an unknown value
+R11=0x00007f28a2d27f50: <offset 0x9cbf50> in /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so at 0x00007f28a235c000
+R12=0x0000000000000000 is an unknown value
+R13=0x0000000000000000 is an unknown value
+R14=0x00007f2881a0d820: <offset 0x258820> in /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so at 0x00007f28817b5000
+R15=0x00007f289c35f800 is a thread
+
+
+Stack: [0x00007f2880b31000,0x00007f2880c32000],  sp=0x00007f2880c30438,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+v  ~BufferBlob::jni_fast_GetLongField
+C  [libX11.so.6+0x65f4d]  _XimServerDestroy+0x4d
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  sun.awt.X11.XlibWrapper.XFilterEvent(JJ)Z+0
+j  sun.awt.X11.XToolkit.run(Z)V+300
+j  sun.awt.X11.XToolkit.run()V+5
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f27c011c000 JavaThread "Timer-0" daemon [_thread_blocked, id=45277, stack(0x00007f2880004000,0x00007f2880105000)]
+  0x00007f27c0094000 JavaThread "TimerQueue" daemon [_thread_blocked, id=45276, stack(0x00007f2880105000,0x00007f2880206000)]
+  0x00007f27c003c000 JavaThread "Image Fetcher 0" daemon [_thread_blocked, id=45273, stack(0x00007f288082e000,0x00007f288092f000)]
+  0x00007f289c00b800 JavaThread "DestroyJavaVM" [_thread_blocked, id=45216, stack(0x00007f28a210d000,0x00007f28a220d000)]
+  0x00007f289c363800 JavaThread "AWT-EventQueue-0" [_thread_blocked, id=45272, stack(0x00007f288092f000,0x00007f2880a30000)]
+  0x00007f289c362000 JavaThread "AWT-Shutdown" [_thread_blocked, id=45271, stack(0x00007f2880a30000,0x00007f2880b31000)]
+=>0x00007f289c35f800 JavaThread "AWT-XAWT" daemon [_thread_in_native, id=45270, stack(0x00007f2880b31000,0x00007f2880c32000)]
+  0x00007f289c342000 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=45269, stack(0x00007f2880c5b000,0x00007f2880d5c000)]
+  0x00007f289c0e6000 JavaThread "Service Thread" daemon [_thread_blocked, id=45246, stack(0x00007f2881e76000,0x00007f2881f77000)]
+  0x00007f289c0e3800 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=45245, stack(0x00007f2881f78000,0x00007f2882078000)]
+  0x00007f289c0e1800 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=45244, stack(0x00007f2882079000,0x00007f2882179000)]
+  0x00007f289c0df000 JavaThread "C1 CompilerThread9" daemon [_thread_blocked, id=45243, stack(0x00007f288217a000,0x00007f288227a000)]
+  0x00007f289c0dd800 JavaThread "C1 CompilerThread8" daemon [_thread_blocked, id=45242, stack(0x00007f288227b000,0x00007f288237b000)]
+  0x00007f289c0db000 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=45241, stack(0x00007f288237c000,0x00007f288247c000)]
+  0x00007f289c0d9800 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=45240, stack(0x00007f288247d000,0x00007f288257d000)]
+  0x00007f289c0d7000 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=45239, stack(0x00007f288257e000,0x00007f288267e000)]
+  0x00007f289c0d5000 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=45238, stack(0x00007f288267f000,0x00007f288277f000)]
+  0x00007f289c0d3000 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=45237, stack(0x00007f2882780000,0x00007f2882880000)]
+  0x00007f289c0d1000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=45236, stack(0x00007f2882881000,0x00007f2882981000)]
+  0x00007f289c0cf000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=45235, stack(0x00007f2882982000,0x00007f2882a82000)]
+  0x00007f289c0cc000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=45234, stack(0x00007f2882a83000,0x00007f2882b83000)]
+  0x00007f289c0ca800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=45233, stack(0x00007f2882b83000,0x00007f2882c84000)]
+  0x00007f289c097800 JavaThread "Finalizer" daemon [_thread_blocked, id=45232, stack(0x00007f28834f5000,0x00007f28835f6000)]
+  0x00007f289c093000 JavaThread "Reference Handler" daemon [_thread_blocked, id=45231, stack(0x00007f28835f6000,0x00007f28836f7000)]
+
+Other Threads:
+  0x00007f289c08b000 VMThread [stack: 0x00007f28836f8000,0x00007f28837f8000] [id=45230]
+  0x00007f289c0eb000 WatcherThread [stack: 0x00007f2881d76000,0x00007f2881e76000] [id=45247]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 149504K, used 30843K [0x0000000719700000, 0x0000000723d80000, 0x00000007c0000000)
+  eden space 128512K, 24% used [0x0000000719700000,0x000000071b51efe8,0x0000000721480000)
+  from space 20992K, 0% used [0x0000000722900000,0x0000000722900000,0x0000000723d80000)
+  to   space 20992K, 0% used [0x0000000721480000,0x0000000721480000,0x0000000722900000)
+ ParOldGen       total 341504K, used 0K [0x00000005cc400000, 0x00000005e1180000, 0x0000000719700000)
+  object space 341504K, 0% used [0x00000005cc400000,0x00000005cc400000,0x00000005e1180000)
+ Metaspace       used 14565K, capacity 14696K, committed 14976K, reserved 1062912K
+  class space    used 1762K, capacity 1824K, committed 1920K, reserved 1048576K
+
+Card table byte_map: [0x00007f28a0723000,0x00007f28a16c2000] byte_map_base: 0x00007f289d8c1000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f28a332b1a0
+ Begin Bits: [0x00007f282c620000, 0x00007f2834310000)
+ End Bits:   [0x00007f2834310000, 0x00007f283c000000)
+
+Polling page: 0x00007f28a37cd000
+
+CodeCache: size=245760Kb used=4711Kb max_used=4724Kb free=241048Kb
+ bounds [0x00007f288d000000, 0x00007f288d4a0000, 0x00007f289c000000]
+ total_blobs=1448 nmethods=867 adapters=492
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 0.241 Thread 0x00007f289c0df000 nmethod 862 0x00007f288d4940d0 code [0x00007f288d494220, 0x00007f288d494330]
+Event: 0.242 Thread 0x00007f289c0dd800  863       3       java.awt.Component::getForeground (29 bytes)
+Event: 0.242 Thread 0x00007f289c0e1800  864       3       java.awt.font.FontRenderContext::equals (127 bytes)
+Event: 0.242 Thread 0x00007f289c0db000  865       4       java.util.HashMap::get (23 bytes)
+Event: 0.242 Thread 0x00007f289c0dd800 nmethod 863 0x00007f288d494790 code [0x00007f288d494920, 0x00007f288d494d68]
+Event: 0.243 Thread 0x00007f289c0e1800 nmethod 864 0x00007f288d494e90 code [0x00007f288d495140, 0x00007f288d496498]
+Event: 0.244 Thread 0x00007f289c0db000 nmethod 865 0x00007f288d499910 code [0x00007f288d499a80, 0x00007f288d499db8]
+Event: 0.249 Thread 0x00007f289c0d5000 nmethod 853 0x00007f288d49cb10 code [0x00007f288d49cd60, 0x00007f288d49dfe8]
+Event: 0.252 Thread 0x00007f289c0e3800  866       3       sun.awt.X11.XPropertyEvent::get_atom (20 bytes)
+Event: 0.252 Thread 0x00007f289c0e3800 nmethod 866 0x00007f288d49c3d0 code [0x00007f288d49c560, 0x00007f288d49c948]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (4 events):
+Event: 0.176 Thread 0x00007f289c363800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f288d2c3f48 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+Event: 0.176 Thread 0x00007f289c363800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f288d2c3f48 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+Event: 0.176 Thread 0x00007f289c363800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f288d2c3f48 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+Event: 0.176 Thread 0x00007f289c363800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f288d2c3f48 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0.057 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007197d1a08) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+Event: 0.057 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007197d1c18) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+Event: 0.057 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007197d47e0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+Event: 0.057 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007197d49f0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+Event: 0.077 Thread 0x00007f289c00b800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000007198a0d10) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 0.078 Thread 0x00007f289c00b800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000007198ae430) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 0.086 Thread 0x00007f289c00b800 Exception <a 'java/io/FileNotFoundException'> (0x000000071992f610) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 0.086 Thread 0x00007f289c00b800 Exception <a 'java/io/FileNotFoundException'> (0x0000000719930098) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 0.092 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x000000071996d838) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+Event: 0.092 Thread 0x00007f289c00b800 Exception <a 'java/security/PrivilegedActionException'> (0x000000071996da48) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u152/9742/hotspot/src/share/vm/prims/jvm.cpp, line 1390]
+
+Events (10 events):
+Event: 0.242 loading class java/text/AttributedString
+Event: 0.242 loading class java/text/AttributedString done
+Event: 0.242 loading class java/text/AttributedString$AttributedStringIterator
+Event: 0.242 loading class java/text/AttributedCharacterIterator
+Event: 0.242 loading class java/text/AttributedCharacterIterator done
+Event: 0.242 loading class java/text/AttributedString$AttributedStringIterator done
+Event: 1.005 loading class sun/awt/X11/XkbEvent
+Event: 1.005 loading class sun/awt/X11/XkbEvent done
+Event: 1.005 loading class sun/awt/X11/XkbAnyEvent
+Event: 1.005 loading class sun/awt/X11/XkbAnyEvent done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 103:02 70517589                          /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/bin/java
+00600000-00601000 rw-p 00000000 103:02 70517589                          /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/bin/java
+00601000-00622000 rw-p 00000000 00:00 0                                  [heap]
+5cc400000-5e1180000 rw-p 00000000 00:00 0 
+5e1180000-719700000 ---p 00000000 00:00 0 
+719700000-723d80000 rw-p 00000000 00:00 0 
+723d80000-7c0000000 ---p 00000000 00:00 0 
+7c0000000-7c01e0000 rw-p 00000000 00:00 0 
+7c01e0000-800000000 ---p 00000000 00:00 0 
+7f27b8000000-7f27b8021000 rw-p 00000000 00:00 0 
+7f27b8021000-7f27bc000000 ---p 00000000 00:00 0 
+7f27bc000000-7f27bc021000 rw-p 00000000 00:00 0 
+7f27bc021000-7f27c0000000 ---p 00000000 00:00 0 
+7f27c0000000-7f27c03d7000 rw-p 00000000 00:00 0 
+7f27c03d7000-7f27c4000000 ---p 00000000 00:00 0 
+7f27c4000000-7f27c402a000 rw-p 00000000 00:00 0 
+7f27c402a000-7f27c8000000 ---p 00000000 00:00 0 
+7f27c8000000-7f27c802a000 rw-p 00000000 00:00 0 
+7f27c802a000-7f27cc000000 ---p 00000000 00:00 0 
+7f27cc000000-7f27cc021000 rw-p 00000000 00:00 0 
+7f27cc021000-7f27d0000000 ---p 00000000 00:00 0 
+7f27d0000000-7f27d0021000 rw-p 00000000 00:00 0 
+7f27d0021000-7f27d4000000 ---p 00000000 00:00 0 
+7f27d4000000-7f27d4021000 rw-p 00000000 00:00 0 
+7f27d4021000-7f27d8000000 ---p 00000000 00:00 0 
+7f27d8000000-7f27d80b5000 rw-p 00000000 00:00 0 
+7f27d80b5000-7f27dc000000 ---p 00000000 00:00 0 
+7f27dc000000-7f27dc021000 rw-p 00000000 00:00 0 
+7f27dc021000-7f27e0000000 ---p 00000000 00:00 0 
+7f27e0000000-7f27e00d6000 rw-p 00000000 00:00 0 
+7f27e00d6000-7f27e4000000 ---p 00000000 00:00 0 
+7f27e4000000-7f27e40ad000 rw-p 00000000 00:00 0 
+7f27e40ad000-7f27e8000000 ---p 00000000 00:00 0 
+7f27e8000000-7f27e802a000 rw-p 00000000 00:00 0 
+7f27e802a000-7f27ec000000 ---p 00000000 00:00 0 
+7f27ec000000-7f27ec0eb000 rw-p 00000000 00:00 0 
+7f27ec0eb000-7f27f0000000 ---p 00000000 00:00 0 
+7f27f0000000-7f27f0021000 rw-p 00000000 00:00 0 
+7f27f0021000-7f27f4000000 ---p 00000000 00:00 0 
+7f27f4000000-7f27f4021000 rw-p 00000000 00:00 0 
+7f27f4021000-7f27f8000000 ---p 00000000 00:00 0 
+7f27f8000000-7f27f8021000 rw-p 00000000 00:00 0 
+7f27f8021000-7f27fc000000 ---p 00000000 00:00 0 
+7f27fc000000-7f27fc0d6000 rw-p 00000000 00:00 0 
+7f27fc0d6000-7f2800000000 ---p 00000000 00:00 0 
+7f2800000000-7f2800021000 rw-p 00000000 00:00 0 
+7f2800021000-7f2804000000 ---p 00000000 00:00 0 
+7f2804000000-7f280405c000 rw-p 00000000 00:00 0 
+7f280405c000-7f2808000000 ---p 00000000 00:00 0 
+7f2808000000-7f2808021000 rw-p 00000000 00:00 0 
+7f2808021000-7f280c000000 ---p 00000000 00:00 0 
+7f280c000000-7f280c0b0000 rw-p 00000000 00:00 0 
+7f280c0b0000-7f2810000000 ---p 00000000 00:00 0 
+7f2810000000-7f2810021000 rw-p 00000000 00:00 0 
+7f2810021000-7f2814000000 ---p 00000000 00:00 0 
+7f2814000000-7f2814021000 rw-p 00000000 00:00 0 
+7f2814021000-7f2818000000 ---p 00000000 00:00 0 
+7f2818000000-7f2818021000 rw-p 00000000 00:00 0 
+7f2818021000-7f281c000000 ---p 00000000 00:00 0 
+7f2820000000-7f2820021000 rw-p 00000000 00:00 0 
+7f2820021000-7f2824000000 ---p 00000000 00:00 0 
+7f2828000000-7f2828021000 rw-p 00000000 00:00 0 
+7f2828021000-7f282c000000 ---p 00000000 00:00 0 
+7f282c620000-7f283c000000 rw-p 00000000 00:00 0 
+7f283c000000-7f283c021000 rw-p 00000000 00:00 0 
+7f283c021000-7f2840000000 ---p 00000000 00:00 0 
+7f2840000000-7f2840021000 rw-p 00000000 00:00 0 
+7f2840021000-7f2844000000 ---p 00000000 00:00 0 
+7f2844000000-7f2844021000 rw-p 00000000 00:00 0 
+7f2844021000-7f2848000000 ---p 00000000 00:00 0 
+7f284c000000-7f284c021000 rw-p 00000000 00:00 0 
+7f284c021000-7f2850000000 ---p 00000000 00:00 0 
+7f2854000000-7f2854021000 rw-p 00000000 00:00 0 
+7f2854021000-7f2858000000 ---p 00000000 00:00 0 
+7f285c000000-7f285c021000 rw-p 00000000 00:00 0 
+7f285c021000-7f2860000000 ---p 00000000 00:00 0 
+7f2864000000-7f2864021000 rw-p 00000000 00:00 0 
+7f2864021000-7f2868000000 ---p 00000000 00:00 0 
+7f286c000000-7f286c021000 rw-p 00000000 00:00 0 
+7f286c021000-7f2870000000 ---p 00000000 00:00 0 
+7f2874000000-7f2874021000 rw-p 00000000 00:00 0 
+7f2874021000-7f2878000000 ---p 00000000 00:00 0 
+7f287897f000-7f2878a3f000 rw-p 00000000 00:00 0 
+7f2878a3f000-7f2878b7f000 ---p 00000000 00:00 0 
+7f2878b7f000-7f2878d7f000 rw-p 00000000 00:00 0 
+7f2878d7f000-7f2878de9000 r-xp 00000000 103:02 70517778                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libt2k.so
+7f2878de9000-7f2878fe8000 ---p 0006a000 103:02 70517778                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libt2k.so
+7f2878fe8000-7f2878fef000 rw-p 00069000 103:02 70517778                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libt2k.so
+7f2878fef000-7f287c000000 rw-p 00000000 00:00 0 
+7f287c000000-7f287c021000 rw-p 00000000 00:00 0 
+7f287c021000-7f2880000000 ---p 00000000 00:00 0 
+7f2880001000-7f2880004000 rw-s 00000000 00:01 32827                      /SYSV00000000 (deleted)
+7f2880004000-7f2880007000 ---p 00000000 00:00 0 
+7f2880007000-7f2880105000 rw-p 00000000 00:00 0 
+7f2880105000-7f2880108000 ---p 00000000 00:00 0 
+7f2880108000-7f2880206000 rw-p 00000000 00:00 0 
+7f2880206000-7f2880217000 r-xp 00000000 103:02 70517816                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f2880217000-7f2880416000 ---p 00011000 103:02 70517816                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f2880416000-7f2880417000 rw-p 00010000 103:02 70517816                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f2880417000-7f288042d000 r-xp 00000000 103:02 70517829                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f288042d000-7f288062d000 ---p 00016000 103:02 70517829                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f288062d000-7f288062e000 rw-p 00016000 103:02 70517829                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f288062e000-7f288082e000 rw-p 00000000 00:00 0 
+7f288082e000-7f2880831000 ---p 00000000 00:00 0 
+7f2880831000-7f288092f000 rw-p 00000000 00:00 0 
+7f288092f000-7f2880932000 ---p 00000000 00:00 0 
+7f2880932000-7f2880a30000 rw-p 00000000 00:00 0 
+7f2880a30000-7f2880a33000 ---p 00000000 00:00 0 
+7f2880a33000-7f2880b31000 rw-p 00000000 00:00 0 
+7f2880b31000-7f2880b34000 ---p 00000000 00:00 0 
+7f2880b34000-7f2880c32000 rw-p 00000000 00:00 0 
+7f2880c32000-7f2880c34000 r--p 00000000 103:02 70261845                  /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f2880c34000-7f2880c37000 r-xp 00002000 103:02 70261845                  /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f2880c37000-7f2880c38000 r--p 00005000 103:02 70261845                  /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f2880c38000-7f2880c39000 r--p 00005000 103:02 70261845                  /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f2880c39000-7f2880c3a000 rw-p 00006000 103:02 70261845                  /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f2880c3a000-7f2880c3d000 r--p 00000000 103:02 70261837                  /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f2880c3d000-7f2880c43000 r-xp 00003000 103:02 70261837                  /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f2880c43000-7f2880c45000 r--p 00009000 103:02 70261837                  /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f2880c45000-7f2880c46000 r--p 0000a000 103:02 70261837                  /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f2880c46000-7f2880c47000 rw-p 0000b000 103:02 70261837                  /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f2880c48000-7f2880c5b000 r--s 00345000 103:02 70517604                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/resources.jar
+7f2880c5b000-7f2880c5e000 ---p 00000000 00:00 0 
+7f2880c5e000-7f2880d5c000 rw-p 00000000 00:00 0 
+7f2880d5c000-7f2880d72000 r-xp 00000000 103:02 70389790                  /usr/local/MATLAB/R2018b/sys/os/glnxa64/libgcc_s.so.1
+7f2880d72000-7f2880f71000 ---p 00016000 103:02 70389790                  /usr/local/MATLAB/R2018b/sys/os/glnxa64/libgcc_s.so.1
+7f2880f71000-7f2880f72000 r--p 00015000 103:02 70389790                  /usr/local/MATLAB/R2018b/sys/os/glnxa64/libgcc_s.so.1
+7f2880f72000-7f2880f73000 rw-p 00016000 103:02 70389790                  /usr/local/MATLAB/R2018b/sys/os/glnxa64/libgcc_s.so.1
+7f2880f73000-7f2880fd8000 r-xp 00000000 103:02 70517802                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f2880fd8000-7f28811d7000 ---p 00065000 103:02 70517802                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f28811d7000-7f28811dc000 rw-p 00064000 103:02 70517802                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f28811dc000-7f28811ec000 rw-p 00000000 00:00 0 
+7f28811ec000-7f28811ed000 r--s 00000000 103:02 70396179                  /usr/local/MATLAB/R2018b/java/jar/zh_CN/fatalexit_res.jar
+7f28811ed000-7f28811f1000 r--s 0001f000 103:02 73142638                  /usr/local/MATLAB/R2018b/java/jarext/axis2/XmlSchema.jar
+7f28811f1000-7f28811f7000 r--s 0007a000 103:02 73142637                  /usr/local/MATLAB/R2018b/java/jarext/axis2/wstx-asl.jar
+7f28811f7000-7f28811fc000 r--s 00020000 103:02 73142636                  /usr/local/MATLAB/R2018b/java/jarext/axis2/wsdl4j.jar
+7f28811fc000-7f28811fe000 r--s 00007000 103:02 73142635                  /usr/local/MATLAB/R2018b/java/jarext/axis2/neethi.jar
+7f28811fe000-7f2881204000 r--s 00059000 103:02 73142634                  /usr/local/MATLAB/R2018b/java/jarext/axis2/mail.jar
+7f2881204000-7f2881209000 r--s 00026000 103:02 73142633                  /usr/local/MATLAB/R2018b/java/jarext/axis2/httpcore.jar
+7f2881209000-7f288120b000 r--s 00006000 103:02 73142632                  /usr/local/MATLAB/R2018b/java/jarext/axis2/geronimo-stax-api.jar
+7f288120b000-7f2881211000 r--s 00045000 103:02 73142631                  /usr/local/MATLAB/R2018b/java/jarext/axis2/commons-httpclient.jar
+7f2881211000-7f2881214000 r--s 00023000 103:02 73142629                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-transport-http.jar
+7f2881214000-7f2881221000 r--s 000e8000 103:02 73142628                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-kernel.jar
+7f2881221000-7f288122c000 r--s 000b4000 103:02 73142627                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-adb.jar
+7f288122c000-7f288122f000 r--s 0001b000 103:02 73142626                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axiom-impl.jar
+7f288122f000-7f2881238000 r--s 0005d000 103:02 73142625                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axiom-api.jar
+7f2881238000-7f288123a000 r--s 0000e000 103:02 73142624                  /usr/local/MATLAB/R2018b/java/jarext/axis2/activation.jar
+7f288123a000-7f2881242000 r--s 00053000 103:02 70388435                  /usr/local/MATLAB/R2018b/java/jarext/jgoodies-looks.jar
+7f2881242000-7f2881246000 r--s 00038000 103:02 70389998                  /usr/local/MATLAB/R2018b/java/jarext/commons-lang.jar
+7f2881246000-7f288124a000 r--p 00000000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f288124a000-7f2881259000 r-xp 00004000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f2881259000-7f288125c000 r--p 00013000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f288125c000-7f288125d000 ---p 00016000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f288125d000-7f288125e000 r--p 00016000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f288125e000-7f288125f000 rw-p 00017000 103:02 70261997                  /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+7f288125f000-7f2881260000 rw-p 00000000 00:00 0 
+7f2881260000-7f2881262000 r--p 00000000 103:02 70261841                  /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f2881262000-7f2881264000 r-xp 00002000 103:02 70261841                  /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f2881264000-7f2881266000 r--p 00004000 103:02 70261841                  /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f2881266000-7f2881267000 r--p 00005000 103:02 70261841                  /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f2881267000-7f2881268000 rw-p 00006000 103:02 70261841                  /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f2881268000-7f288126d000 r-xp 00000000 103:02 70261869                  /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f288126d000-7f288146c000 ---p 00005000 103:02 70261869                  /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f288146c000-7f288146d000 r--p 00004000 103:02 70261869                  /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f288146d000-7f288146e000 rw-p 00005000 103:02 70261869                  /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f288146e000-7f2881477000 r-xp 00000000 103:02 70261863                  /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f2881477000-7f2881676000 ---p 00009000 103:02 70261863                  /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f2881676000-7f2881677000 r--p 00008000 103:02 70261863                  /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f2881677000-7f2881678000 rw-p 00009000 103:02 70261863                  /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f2881678000-7f2881690000 r--p 00000000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f2881690000-7f288171b000 r-xp 00018000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f288171b000-7f28817af000 r--p 000a3000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f28817af000-7f28817b0000 ---p 00137000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f28817b0000-7f28817b1000 r--p 00137000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f28817b1000-7f28817b5000 rw-p 00138000 103:02 70261826                  /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f28817b5000-7f2881809000 r-xp 00000000 103:02 70517770                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f2881809000-7f2881a09000 ---p 00054000 103:02 70517770                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f2881a09000-7f2881a0d000 rw-p 00054000 103:02 70517770                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f2881a0d000-7f2881a0e000 rw-p 00000000 00:00 0 
+7f2881a0e000-7f2881ab0000 r-xp 00000000 103:02 70517800                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f2881ab0000-7f2881cb0000 ---p 000a2000 103:02 70517800                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f2881cb0000-7f2881cbc000 rw-p 000a2000 103:02 70517800                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f2881cbc000-7f2881ce0000 rw-p 00000000 00:00 0 
+7f2881ce0000-7f2881d75000 r--s 01113000 103:02 70517850                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/ext/jfxrt.jar
+7f2881d75000-7f2881d76000 ---p 00000000 00:00 0 
+7f2881d76000-7f2881e76000 rw-p 00000000 00:00 0 
+7f2881e76000-7f2881e79000 ---p 00000000 00:00 0 
+7f2881e79000-7f2881f77000 rw-p 00000000 00:00 0 
+7f2881f77000-7f2881f78000 ---p 00000000 00:00 0 
+7f2881f78000-7f2881f7b000 ---p 00000000 00:00 0 
+7f2881f7b000-7f2882078000 rw-p 00000000 00:00 0 
+7f2882078000-7f2882079000 ---p 00000000 00:00 0 
+7f2882079000-7f288207c000 ---p 00000000 00:00 0 
+7f288207c000-7f2882179000 rw-p 00000000 00:00 0 
+7f2882179000-7f288217a000 ---p 00000000 00:00 0 
+7f288217a000-7f288217d000 ---p 00000000 00:00 0 
+7f288217d000-7f288227a000 rw-p 00000000 00:00 0 
+7f288227a000-7f288227b000 ---p 00000000 00:00 0 
+7f288227b000-7f288227e000 ---p 00000000 00:00 0 
+7f288227e000-7f288237b000 rw-p 00000000 00:00 0 
+7f288237b000-7f288237c000 ---p 00000000 00:00 0 
+7f288237c000-7f288237f000 ---p 00000000 00:00 0 
+7f288237f000-7f288247c000 rw-p 00000000 00:00 0 
+7f288247c000-7f288247d000 ---p 00000000 00:00 0 
+7f288247d000-7f2882480000 ---p 00000000 00:00 0 
+7f2882480000-7f288257d000 rw-p 00000000 00:00 0 
+7f288257d000-7f288257e000 ---p 00000000 00:00 0 
+7f288257e000-7f2882581000 ---p 00000000 00:00 0 
+7f2882581000-7f288267e000 rw-p 00000000 00:00 0 
+7f288267e000-7f288267f000 ---p 00000000 00:00 0 
+7f288267f000-7f2882682000 ---p 00000000 00:00 0 
+7f2882682000-7f288277f000 rw-p 00000000 00:00 0 
+7f288277f000-7f2882780000 ---p 00000000 00:00 0 
+7f2882780000-7f2882783000 ---p 00000000 00:00 0 
+7f2882783000-7f2882880000 rw-p 00000000 00:00 0 
+7f2882880000-7f2882881000 ---p 00000000 00:00 0 
+7f2882881000-7f2882884000 ---p 00000000 00:00 0 
+7f2882884000-7f2882981000 rw-p 00000000 00:00 0 
+7f2882981000-7f2882982000 ---p 00000000 00:00 0 
+7f2882982000-7f2882985000 ---p 00000000 00:00 0 
+7f2882985000-7f2882a82000 rw-p 00000000 00:00 0 
+7f2882a82000-7f2882a83000 ---p 00000000 00:00 0 
+7f2882a83000-7f2882a86000 ---p 00000000 00:00 0 
+7f2882a86000-7f2882b83000 rw-p 00000000 00:00 0 
+7f2882b83000-7f2882b86000 ---p 00000000 00:00 0 
+7f2882b86000-7f2882c84000 rw-p 00000000 00:00 0 
+7f2882c84000-7f28834f5000 r--p 00000000 103:02 70259143                  /usr/lib/locale/locale-archive
+7f28834f5000-7f28834f8000 ---p 00000000 00:00 0 
+7f28834f8000-7f28835f6000 rw-p 00000000 00:00 0 
+7f28835f6000-7f28835f9000 ---p 00000000 00:00 0 
+7f28835f9000-7f28836f7000 rw-p 00000000 00:00 0 
+7f28836f7000-7f28836f8000 ---p 00000000 00:00 0 
+7f28836f8000-7f2884000000 rw-p 00000000 00:00 0 
+7f2884000000-7f2884021000 rw-p 00000000 00:00 0 
+7f2884021000-7f2888000000 ---p 00000000 00:00 0 
+7f2888000000-7f2888001000 r--s 00000000 103:02 70523336                  /usr/local/MATLAB/R2018b/java/jar/ja_JP/fatalexit_res.jar
+7f2888001000-7f2888003000 r--s 0000d000 103:02 70390771                  /usr/local/MATLAB/R2018b/java/jarext/commons-logging.jar
+7f2888003000-7f2888007000 r--s 0002a000 103:02 70389080                  /usr/local/MATLAB/R2018b/java/jarext/commons-io.jar
+7f2888007000-7f2888012000 r--p 00000000 103:02 70263314                  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f2888012000-7f2888026000 r-xp 0000b000 103:02 70263314                  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f2888026000-7f288802f000 r--p 0001f000 103:02 70263314                  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f288802f000-7f2888030000 r--p 00027000 103:02 70263314                  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f2888030000-7f2888031000 rw-p 00028000 103:02 70263314                  /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f2888031000-7f2888033000 r--p 00000000 103:02 70261851                  /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f2888033000-7f288803e000 r-xp 00002000 103:02 70261851                  /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f288803e000-7f2888041000 r--p 0000d000 103:02 70261851                  /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f2888041000-7f2888042000 r--p 0000f000 103:02 70261851                  /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f2888042000-7f2888043000 rw-p 00010000 103:02 70261851                  /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f2888043000-7f288a482000 rw-p 00000000 00:00 0 
+7f288a482000-7f288a65c000 r--s 03d5f000 103:02 70517624                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/rt.jar
+7f288a65c000-7f288bf90000 rw-p 00000000 00:00 0 
+7f288bf90000-7f288bf91000 ---p 00000000 00:00 0 
+7f288bf91000-7f288c091000 rw-p 00000000 00:00 0 
+7f288c091000-7f288c092000 ---p 00000000 00:00 0 
+7f288c092000-7f288c192000 rw-p 00000000 00:00 0 
+7f288c192000-7f288c193000 ---p 00000000 00:00 0 
+7f288c193000-7f288c293000 rw-p 00000000 00:00 0 
+7f288c293000-7f288c294000 ---p 00000000 00:00 0 
+7f288c294000-7f288c394000 rw-p 00000000 00:00 0 
+7f288c394000-7f288c395000 ---p 00000000 00:00 0 
+7f288c395000-7f288c495000 rw-p 00000000 00:00 0 
+7f288c495000-7f288c496000 ---p 00000000 00:00 0 
+7f288c496000-7f288c63d000 rw-p 00000000 00:00 0 
+7f288c63d000-7f288d000000 ---p 00000000 00:00 0 
+7f288d000000-7f288d4a0000 rwxp 00000000 00:00 0 
+7f288d4a0000-7f289c000000 ---p 00000000 00:00 0 
+7f289c000000-7f289c505000 rw-p 00000000 00:00 0 
+7f289c505000-7f28a0000000 ---p 00000000 00:00 0 
+7f28a0000000-7f28a0001000 r--s 00004000 103:02 73142630                  /usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-transport-local.jar
+7f28a0001000-7f28a0003000 r--s 0000a000 103:02 70390591                  /usr/local/MATLAB/R2018b/java/jarext/commons-codec.jar
+7f28a0003000-7f28a0004000 r--s 00008000 103:02 70390589                  /usr/local/MATLAB/R2018b/java/jarext/commons-cli.jar
+7f28a0004000-7f28a0007000 r--s 00008000 103:02 73141192                  /usr/local/MATLAB/R2018b/java/jarext/webservices/ws_client_core/mw-service-client-core.jar
+7f28a0007000-7f28a000b000 r--p 00000000 103:02 70261843                  /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f28a000b000-7f28a0016000 r-xp 00004000 103:02 70261843                  /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f28a0016000-7f28a001a000 r--p 0000f000 103:02 70261843                  /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f28a001a000-7f28a001b000 r--p 00012000 103:02 70261843                  /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f28a001b000-7f28a001c000 rw-p 00013000 103:02 70261843                  /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f28a001c000-7f28a001d000 ---p 00000000 00:00 0 
+7f28a001d000-7f28a011d000 rw-p 00000000 00:00 0 
+7f28a011d000-7f28a011e000 ---p 00000000 00:00 0 
+7f28a011e000-7f28a021e000 rw-p 00000000 00:00 0 
+7f28a021e000-7f28a021f000 ---p 00000000 00:00 0 
+7f28a021f000-7f28a031f000 rw-p 00000000 00:00 0 
+7f28a031f000-7f28a0320000 ---p 00000000 00:00 0 
+7f28a0320000-7f28a0420000 rw-p 00000000 00:00 0 
+7f28a0420000-7f28a0421000 ---p 00000000 00:00 0 
+7f28a0421000-7f28a0521000 rw-p 00000000 00:00 0 
+7f28a0521000-7f28a0522000 ---p 00000000 00:00 0 
+7f28a0522000-7f28a0622000 rw-p 00000000 00:00 0 
+7f28a0622000-7f28a0623000 ---p 00000000 00:00 0 
+7f28a0623000-7f28a07ca000 rw-p 00000000 00:00 0 
+7f28a07ca000-7f28a118c000 ---p 00000000 00:00 0 
+7f28a118c000-7f28a11e0000 rw-p 00000000 00:00 0 
+7f28a11e0000-7f28a16c1000 ---p 00000000 00:00 0 
+7f28a16c1000-7f28a16d5000 rw-p 00000000 00:00 0 
+7f28a16d5000-7f28a1a82000 ---p 00000000 00:00 0 
+7f28a1a82000-7f28a1a9d000 r-xp 00000000 103:02 70517797                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f28a1a9d000-7f28a1c9d000 ---p 0001b000 103:02 70517797                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f28a1c9d000-7f28a1c9e000 rw-p 0001b000 103:02 70517797                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f28a1c9e000-7f28a1ca1000 r--p 00000000 103:02 70262776                  /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+7f28a1ca1000-7f28a1ca8000 r-xp 00003000 103:02 70262776                  /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+7f28a1ca8000-7f28a1caa000 r--p 0000a000 103:02 70262776                  /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+7f28a1caa000-7f28a1cab000 r--p 0000b000 103:02 70262776                  /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+7f28a1cab000-7f28a1cac000 rw-p 0000c000 103:02 70262776                  /usr/lib/x86_64-linux-gnu/libnss_files-2.31.so
+7f28a1cac000-7f28a1cb2000 rw-p 00000000 00:00 0 
+7f28a1cb2000-7f28a1cbf000 r--s 000a7000 103:02 70388452                  /usr/local/MATLAB/R2018b/java/jarext/webservices/urlmanager/urlmanager.jar
+7f28a1cbf000-7f28a1cc1000 r--s 00003000 103:02 70390960                  /usr/local/MATLAB/R2018b/java/jar/webproxy.jar
+7f28a1cc1000-7f28a1cc6000 r--s 00037000 103:02 70390356                  /usr/local/MATLAB/R2018b/java/jar/mlwebservices.jar
+7f28a1cc6000-7f28a1cf1000 r-xp 00000000 103:02 70517796                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f28a1cf1000-7f28a1ef0000 ---p 0002b000 103:02 70517796                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f28a1ef0000-7f28a1ef2000 rw-p 0002a000 103:02 70517796                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f28a1ef2000-7f28a1eff000 r-xp 00000000 103:02 70517810                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f28a1eff000-7f28a20ff000 ---p 0000d000 103:02 70517810                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f28a20ff000-7f28a2101000 rw-p 0000d000 103:02 70517810                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f28a2101000-7f28a2104000 r--p 00000000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a2104000-7f28a2108000 r-xp 00003000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a2108000-7f28a2109000 r--p 00007000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a2109000-7f28a210a000 ---p 00008000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a210a000-7f28a210b000 r--p 00008000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a210b000-7f28a210c000 rw-p 00009000 103:02 70262983                  /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7f28a210c000-7f28a210d000 ---p 00000000 00:00 0 
+7f28a210d000-7f28a2110000 ---p 00000000 00:00 0 
+7f28a2110000-7f28a220d000 rw-p 00000000 00:00 0 
+7f28a220d000-7f28a221c000 r--p 00000000 103:02 70262653                  /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7f28a221c000-7f28a22c3000 r-xp 0000f000 103:02 70262653                  /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7f28a22c3000-7f28a235a000 r--p 000b6000 103:02 70262653                  /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7f28a235a000-7f28a235b000 r--p 0014c000 103:02 70262653                  /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7f28a235b000-7f28a235c000 rw-p 0014d000 103:02 70262653                  /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7f28a235c000-7f28a3034000 r-xp 00000000 103:02 70517833                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f28a3034000-7f28a3233000 ---p 00cd8000 103:02 70517833                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f28a3233000-7f28a330d000 rw-p 00cd7000 103:02 70517833                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f28a330d000-7f28a335a000 rw-p 00000000 00:00 0 
+7f28a335a000-7f28a337f000 r--p 00000000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a337f000-7f28a34f7000 r-xp 00025000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a34f7000-7f28a3541000 r--p 0019d000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a3541000-7f28a3542000 ---p 001e7000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a3542000-7f28a3545000 r--p 001e7000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a3545000-7f28a3548000 rw-p 001ea000 103:02 70262001                  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7f28a3548000-7f28a354c000 rw-p 00000000 00:00 0 
+7f28a354c000-7f28a354d000 r--p 00000000 103:02 70262142                  /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7f28a354d000-7f28a354f000 r-xp 00001000 103:02 70262142                  /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7f28a354f000-7f28a3550000 r--p 00003000 103:02 70262142                  /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7f28a3550000-7f28a3551000 r--p 00003000 103:02 70262142                  /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7f28a3551000-7f28a3552000 rw-p 00004000 103:02 70262142                  /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7f28a3552000-7f28a3568000 r-xp 00000000 103:02 70517835                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f28a3568000-7f28a3767000 ---p 00016000 103:02 70517835                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f28a3767000-7f28a3768000 rw-p 00015000 103:02 70517835                  /usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f28a3768000-7f28a376f000 r--p 00000000 103:02 70262920                  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7f28a376f000-7f28a3780000 r-xp 00007000 103:02 70262920                  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7f28a3780000-7f28a3785000 r--p 00018000 103:02 70262920                  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7f28a3785000-7f28a3786000 r--p 0001c000 103:02 70262920                  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7f28a3786000-7f28a3787000 rw-p 0001d000 103:02 70262920                  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7f28a3787000-7f28a378b000 rw-p 00000000 00:00 0 
+7f28a378b000-7f28a378c000 r--s 00002000 103:02 73534987                  /usr/local/MATLAB/R2018b/java/jarext/webservices/udc_client/udc_client.jar
+7f28a378c000-7f28a378e000 r--s 00005000 103:02 70395645                  /usr/local/MATLAB/R2018b/java/jar/net.jar
+7f28a378e000-7f28a378f000 r--p 00000000 103:02 70261830                  /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f28a378f000-7f28a3791000 r-xp 00001000 103:02 70261830                  /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f28a3791000-7f28a3792000 r--p 00003000 103:02 70261830                  /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f28a3792000-7f28a3793000 r--p 00003000 103:02 70261830                  /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f28a3793000-7f28a3794000 rw-p 00004000 103:02 70261830                  /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f28a3794000-7f28a3796000 r--s 00008000 103:02 70396177                  /usr/local/MATLAB/R2018b/java/jar/fatalexit.jar
+7f28a3796000-7f28a379e000 rw-s 00000000 103:02 22282706                  /tmp/hsperfdata_congchao/45215
+7f28a379e000-7f28a37a1000 rw-p 00000000 00:00 0 
+7f28a37a1000-7f28a37a2000 r--p 00000000 103:02 70261785                  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f28a37a2000-7f28a37c5000 r-xp 00001000 103:02 70261785                  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f28a37c5000-7f28a37cd000 r--p 00024000 103:02 70261785                  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f28a37cd000-7f28a37ce000 r--p 00000000 00:00 0 
+7f28a37ce000-7f28a37cf000 r--p 0002c000 103:02 70261785                  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f28a37cf000-7f28a37d0000 rw-p 0002d000 103:02 70261785                  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7f28a37d0000-7f28a37d1000 rw-p 00000000 00:00 0 
+7ffdb47a2000-7ffdb47c4000 rw-p 00000000 00:00 0                          [stack]
+7ffdb47e0000-7ffdb47e4000 r--p 00000000 00:00 0                          [vvar]
+7ffdb47e4000-7ffdb47e6000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+java_command: com.mathworks.fatalexit.FatalExitFrame /home/congchao/matlab_crash_dump.5896-1 -segvURL https://udc-service.mathworks.com/udc/service/v1
+java_class_path (initial): /usr/local/MATLAB/R2018b/java/jar/fatalexit.jar:/usr/local/MATLAB/R2018b/java/jar/mlwebservices.jar:/usr/local/MATLAB/R2018b/java/jar/net.jar:/usr/local/MATLAB/R2018b/java/jar/webproxy.jar:/usr/local/MATLAB/R2018b/java/jarext/webservices/udc_client/udc_client.jar:/usr/local/MATLAB/R2018b/java/jarext/webservices/urlmanager/urlmanager.jar:/usr/local/MATLAB/R2018b/java/jarext/webservices/ws_client_core/mw-service-client-core.jar:/usr/local/MATLAB/R2018b/java/jarext/commons-cli.jar:/usr/local/MATLAB/R2018b/java/jarext/commons-codec.jar:/usr/local/MATLAB/R2018b/java/jarext/commons-io.jar:/usr/local/MATLAB/R2018b/java/jarext/commons-lang.jar:/usr/local/MATLAB/R2018b/java/jarext/commons-logging.jar:/usr/local/MATLAB/R2018b/java/jarext/jgoodies-looks.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/activation.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axiom-api.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axiom-impl.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-adb.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-kernel.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-transport-http.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/axis2-transport-local.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/commons-httpclient.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/geronimo-stax-api.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/httpcore.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/mail.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/neethi.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/wsdl4j.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/wstx-asl.jar:/usr/local/MATLAB/R2018b/java/jarext/axis2/XmlSchema.jar:/usr/local/MATLAB/R2018b/java/jar/ja_JP/fatalexit_res.jar:/usr/local/MATLAB/R2018b/java/jar/zh_CN/fatalexit_res.jar:/usr/local/MATLAB/R2018b/java/jar.ko_KR/fatalexit_res.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/home/congchao/anaconda3/bin:/home/congchao/anaconda3/condabin:/home/congchao/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+USERNAME=congchao
+LD_LIBRARY_PATH=/usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server:/usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64:/usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/../lib/amd64:/usr/local/MATLAB/R2018b/sys/os/glnxa64:/usr/local/MATLAB/R2018b/bin/glnxa64:/usr/local/MATLAB/R2018b/extern/lib/glnxa64:/usr/local/MATLAB/R2018b/runtime/glnxa64:/usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/usr/local/MATLAB/R2018b/sys/java/jre/glnxa64/jre/lib/amd64/server
+SHELL=/bin/bash
+DISPLAY=:1
+ARCH=glnxa64
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xacfec0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xacfec0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x927e60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x927e60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x927e60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x927e60], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x9296a0], sa_mask[0]=01000000001010000001000000010000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x92aaa0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x92aaa0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x92aaa0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x92aaa0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION="Ubuntu 20.04.3 LTS"
+
+uname:Linux 5.11.0-41-generic #45~20.04.1-Ubuntu SMP Wed Nov 10 10:20:10 UTC 2021 x86_64
+libc:glibc 2.31 NPTL 2.31 
+rlimit: STACK 8192k, CORE 0k, NPROC 127652, NOFILE 1048576, AS infinity
+load average:0.33 0.27 0.21
+
+/proc/meminfo:
+MemTotal:       32744440 kB
+MemFree:        19092236 kB
+MemAvailable:   26330776 kB
+Buffers:         1142120 kB
+Cached:          4130040 kB
+SwapCached:            0 kB
+Active:          3588420 kB
+Inactive:        6807456 kB
+Active(anon):       3864 kB
+Inactive(anon):  5209920 kB
+Active(file):    3584556 kB
+Inactive(file):  1597536 kB
+Unevictable:          16 kB
+Mlocked:              16 kB
+SwapTotal:      62914556 kB
+SwapFree:       62914556 kB
+Dirty:              2464 kB
+Writeback:            24 kB
+AnonPages:       5123928 kB
+Mapped:          1448024 kB
+Shmem:             94648 kB
+KReclaimable:    2530264 kB
+Slab:            2750184 kB
+SReclaimable:    2530264 kB
+SUnreclaim:       219920 kB
+KernelStack:       28832 kB
+PageTables:        60244 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    79286776 kB
+Committed_AS:   17691636 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      114660 kB
+VmallocChunk:          0 kB
+Percpu:            13056 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      794284 kB
+DirectMap2M:    12703744 kB
+DirectMap1G:    22020096 kB
+
+
+CPU:total 16 (initial active 16) (8 cores per cpu, 2 threads per core) family 6 model 167 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 1363.877
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 8
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 10
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 12
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 14
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 8
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 9
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 10
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 4683.846
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 11
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 7
+initial apicid	: 7
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 12
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 9
+initial apicid	: 9
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 13
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 11
+initial apicid	: 11
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 14
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 13
+initial apicid	: 13
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 15
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 167
+model name	: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+stepping	: 1
+microcode	: 0x40
+cpu MHz		: 3600.000
+cache size	: 16384 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 15
+initial apicid	: 15
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 27
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap avx512ifma clflushopt intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities
+vmx flags	: vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple pml ept_mode_based_exec tsc_scaling
+bugs		: spectre_v1 spectre_v2 spec_store_bypass swapgs
+bogomips	: 7200.00
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 32744440k(19108532k free), swap 62914556k(62914556k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.152-b16) for linux-amd64 JRE (1.8.0_152-b16), built on Sep 14 2017 02:16:14 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Sat Oct 22 21:21:44 2022
+elapsed time: 2 seconds (0d 0h 0m 2s)
+

@@ -1,0 +1,99 @@
+function movieInfo1 = combine_movieInfo(movieInfo1, movieInfo2, refine_res1, overlap)
+% combine tracking results of two batches of videos.
+% |overlap| defines the number of overlapped frames in two tracking
+% results.
+% Use movieInfo1 as base. We will not change any track in movieInfo1, only
+% try find its successors in movieInfo2.
+
+if overlap < 1
+    error("the two videos much have at least 1 overlapped frames!");
+end
+
+% fields to update:n_perframe, xCoord, yCoord, zCoord, tracks, parents
+%% FOR: tracks and parents
+num_cell_appended = sum(movieInfo2.n_perframe(overlap+1:end));
+num_added_predecessor_for_2 = sum(movieInfo1.n_perframe) - sum(movieInfo1.n_perframe(1:overlap));
+
+parent_track_ids = zeros(numel(movieInfo2.tracks), 1);
+num_removed_overlapped_cells = zeros(numel(movieInfo2.tracks), 1);
+for i = 1:numel(movieInfo2.tracks)
+    ov_pts = [];
+    for j = 1: numel(movieInfo2.tracks{i})
+        if movieInfo2.frames(movieInfo2.tracks{i}(j)) <= overlap
+            ov_pts = cat(1, ov_pts, movieInfo2.tracks{i}(j));
+        else
+            break;
+        end
+    end
+    num_removed_overlapped_cells(i) = length(ov_pts);
+    if length(ov_pts) >= length(movieInfo2.tracks{i})
+        num_removed_overlapped_cells(i) = length(movieInfo2.tracks{i});
+        continue;
+    end
+    if isempty(ov_pts)
+        continue;
+    end
+    % vote to find the parent track
+    ov_track_ids = [];
+    for j = 1:numel(ov_pts)
+        pt = ov_pts(j);
+        f = movieInfo2.frames(pt);
+        if f > overlap
+            error("f should be no-larger than overlap");
+        end
+        labels = refine_res1{end-(overlap-f)}(movieInfo2.voxIdx{pt});
+        labels = labels(labels>0); % more can be done
+        if isempty(labels)
+            continue;
+        end
+        append_num = sum(movieInfo1.n_perframe(1:end-(overlap-f)-1));
+%         if f > 1
+%             append_num = sum(movieInfo2.n_perframe(1:end-(overlap-f)-1));
+%         end
+        mode_id = mode(labels);
+        cell_id_in_1 = mode_id + append_num;
+        if length(find(labels == mode_id)) < 0.5 * length(movieInfo1.voxIdx{cell_id_in_1}) % overlap > 50%
+            continue;
+        end
+        track_id = movieInfo1.particle2track(cell_id_in_1, 1);
+        if ~isnan(track_id)
+            ov_track_ids = cat(1, ov_track_ids, track_id);
+        end
+    end
+    if isempty(ov_track_ids)
+        continue;
+    end
+    parent_track_ids(i) = mode(ov_track_ids);
+end
+
+used_track_in_1 = zeros(numel(movieInfo1.tracks), 1);
+movieInfo1.parents = cat(1, movieInfo1.parents, cell(num_cell_appended, 1));
+for i = 1:numel(movieInfo2.tracks)
+    if num_removed_overlapped_cells(i) >= numel(movieInfo2.tracks{i})
+        continue;
+    end
+    cur_track = movieInfo2.tracks{i}(num_removed_overlapped_cells(i)+1:end) + num_added_predecessor_for_2;
+    first_parent = [];
+    if parent_track_ids(i) == 0 || used_track_in_1(parent_track_ids(i)) == 1
+        movieInfo1.tracks = cat(1, movieInfo1.tracks, cur_track);
+    else
+        first_parent = movieInfo1.tracks{parent_track_ids(i)}(end);
+        movieInfo1.tracks{parent_track_ids(i)} = cat(1, movieInfo1.tracks{parent_track_ids(i)}, cur_track);
+    end
+    cur_parent = first_parent;
+    for j = 1:length(cur_track)
+        movieInfo1.parents{cur_track(j)} = cur_parent;
+        cur_parent = cur_track(j);
+    end
+    if parent_track_ids(i) > 0
+        used_track_in_1(parent_track_ids(i)) = 1;
+    end
+end
+
+%% FOR: n_perframe, xCoord, yCoord, zCoord
+movieInfo1.n_perframe = cat(1, movieInfo1.n_perframe, movieInfo2.n_perframe(overlap+1:end));
+movieInfo1.xCoord =     cat(1, movieInfo1.xCoord,     movieInfo2.xCoord(end-num_cell_appended+1:end));
+movieInfo1.yCoord =     cat(1, movieInfo1.yCoord,     movieInfo2.yCoord(end-num_cell_appended+1:end));
+movieInfo1.zCoord =     cat(1, movieInfo1.zCoord,     movieInfo2.zCoord(end-num_cell_appended+1:end));
+%% TODO: change other fields like frames, particle2track and so on.
+end
