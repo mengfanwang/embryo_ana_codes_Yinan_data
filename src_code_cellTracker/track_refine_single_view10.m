@@ -14,44 +14,14 @@ if isunix
     if cropped_flag
         data_on_insync_folder = '/Insync/ccwang@vt.edu/Google Drive/Projects/embyo_analysis/data/Mengfan_data_10012022/cropped/';
         save_folder = fullfile(home_folder, data_on_insync_folder);
-    else
-        % mengfan's 240-249 frame whole data
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_10012022');
-        % mengfan's 230-239 frame whole data
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_230_239_10072022');
-        % mengfan's 230-249 frame whole data
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_230_249_10072022');
-        % 50-69 frames
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_50_69_10072022');
-        % 66-88 frames: NOTE: other than |refine_res| and |threshold_res|,
-        % the other structures contain 66-89 time points. This is due to
-        % mengfan's code problem.
-        % save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_66_88_10072022');
-        
-        % 50-94 frames
-        %timepts_to_process = generate_tps_str(50:94);
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_50_94_1022');
-        
-        % 90-129 frames
-        %timepts_to_process = generate_tps_str(90:129);
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_90_129_1022');
-        
-        % 50-149 frames
-        %timepts_to_process = generate_tps_str(50:149);
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_50_149_1023');
-        
-        % 72-91 frames
-        %st_t = 72;
-        %end_t = 91;
-        %timepts_to_process = generate_tps_str(st_t:end_t);
-        %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_72_91_1116');
-        
-        % 50-149 frames using mengfan's registration
-        timepts_to_process = generate_tps_str(0:191);
+    else        
+    
+        addpath('src_code_matlab');
+        timepts_to_process = generate_tps_str(100:191);
 %         timepts_to_process = generate_tps_str(66:71);
         wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_10/Wei_refine_res";
 %         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0222';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0228_100_191';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -77,49 +47,10 @@ if cropped_flag
     data_folder = fullfile(save_folder, '/imgs');
     cell_seg_res_folder = save_folder;
 else
-    % mengfan's 240-249 frame whole data
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_240-249_08';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_240-249_08';
-    % mengfan's 230-249 frame whole data
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_230-239_08';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_230-239_08';
-    % mengfan's 230-249 frame whole data
-%     data_folder = '/work/public/sameViewFusion/TwentyFrames/sameViewFusion_230-249_08';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/TwentyFrames/sameViewDetection_230-249_08';
 
-    % 50-69 frame whole data
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_050-069_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-069_11';
-    % 66-88 frame whole data
-%     data_folder = '/work/public/sameViewFusion/merged_batch/sameViewFusion_066-088_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/merged_batch/sameViewDetection_066-088_11';
-    
-    % 50-94 frames
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_050-129_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-129_11';
-    % 90-129 frames --> same as 50-94
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_090-129_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11';
-    
-%     % 50-149 frames 
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_050-149_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11';
-
-    % 72-91 frames --> same as 50-149
-%     data_folder = '/work/public/sameViewFusion/sameViewFusion_050-149_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11';
-    
-    % 50-149 frames using Wei's new results
      data_folder = '/work/public/sameViewFusion/sameViewFusion_10';
      cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_10';
 
-%----------------------------------TODO----------------------------------------%
-    % 50-74 frame whole data
-%     data_folder = '/work/public/sameViewFusion/merged_batch/sameViewFusion_050-74_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/merged_batch/sameViewDetection_050-74_11';
-    % 70-88 frame whole data
-%     data_folder = '/work/public/sameViewFusion/merged_batch/sameViewFusion_070-89_11';
-%     cell_seg_res_folder = '/work/public/sameViewFusion/merged_batch/sameViewDetection_070-89_11';
 end
 if ~exist(cell_seg_res_folder,'dir')
     disp("---> ERROR! None-exist segmentation results!");
@@ -223,6 +154,7 @@ g = graphPara_cell(sum(cellfun(@(x) max(x(:)), refine_res)));%1
 % g.translation_path = fullfile(cell_seg_res_folder, tform_name);
 q = initial_q(sc_f, true);
 
+g.timepts_to_process = timepts_to_process;
 g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view10_l5_s1_linear';
 % g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear_debug';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
@@ -244,10 +176,11 @@ g.driftInfo.z_batch = z_batch;  % vector locations in original image with one pa
 
 %% start tracking
 % q.saveInterMediateRes = true;      % get all resuts
+q.save_folder = save_folder;
 diary(fullfile(save_folder, 'log'));
 
 [movieInfo, movieInfoAll, out_refine_res, refine_resAll,...
-    threshold_res, threshold_resAll] = ....
+    threshold_res, threshold_resAll] = .... 
     mcfTracking_cell(refine_res, embryo_vid, threshold_res, ...
     varMaps, eigMaps, g, q);
 profile viewer;
@@ -277,7 +210,7 @@ if ~exist(mastodon_dir)
 end
 addpath('TGMM_wrapper/');
 mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
-tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'));
+tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process);
 %% stop here
 return;
 %% save seg data for Yinan

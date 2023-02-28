@@ -1,4 +1,4 @@
-function tif2bdv(tif_folder_path, save_data_name)
+function tif2bdv(tif_folder_path, save_data_name, timepts_to_process)
 % tif files to mastodon accepted data format
 
 % clc;clear;close all;
@@ -16,33 +16,43 @@ res_mat = [1 1 1; 2 2 2;];
 res_mat = res_mat';
 sub_mat = 16*ones(3,2);
 
+% write hdf5 data
+h5create([save_data_name '.h5'],'/s00/resolutions',size(res_mat));
+h5write([save_data_name '.h5'], '/s00/resolutions', res_mat);
+h5create([save_data_name '.h5'],'/s00/subdivisions',size(sub_mat));
+h5write([save_data_name '.h5'], '/s00/subdivisions', sub_mat);
+l_num = size(res_mat,2);
+
 % read tif file
-tif_files = dir(fullfile(tif_folder_path, '*.tif'));
-time_num = numel(tif_files);
-for tt = 1:time_num
-%     ind = num2str(100000+tt);
-%     ind = ind(2:end);
-    if tt == 1
-        data_temp = tifread(fullfile(tif_files(tt).folder, tif_files(tt).name));
-        [x,y,z] = size(data_temp);
-        data = zeros(x,y,z,numel(tif_files));
-        data(:,:,:,1) = data_temp;
-    else
-        data(:,:,:,tt) = tifread(fullfile(tif_files(tt).folder, tif_files(tt).name));
-    end
-end
-data = single(data);
+% tif_files = dir(fullfile(tif_folder_path, '*.tif'));
+% time_num = numel(tif_files);
+% time_num = 192; %temp
+for tt = 1:length(timepts_to_process)
+    fprintf('Writing time %d\n', tt);
 
-
-% data transform
-[x,y,z,t] = size(data);
-data_t = zeros(y,x,z,t);
-for tt = 1:t
+    data = tifread(fullfile(tif_folder_path, timepts_to_process(tt)+'.tif'));
+    [x,y,z] = size(data);
+    % data transform
+    data_t = zeros(y,x,z);
     for zz = 1:z
-        data_t(:,:,zz,tt) = data(:,:,zz,tt)';
+        data_t(:,:,zz) = data(:,:,zz)';
+    end
+    data = data_t;
+    data = single(data);
+
+    % write h5 file
+    t_ind = num2str(100000+tt-1);
+    t_ind = t_ind(2:end);
+    s_ind = '00';
+    for ll = 0:l_num-1
+        l_ind = num2str(ll);
+        data_temp = imresize3(data,round(size(data)./res_mat(:,ll+1)'));
+        h5create([save_data_name '.h5'],['/t' t_ind '/s' s_ind '/' l_ind '/cells'],...
+            size(data_temp),'Datatype','uint16','ChunkSize',sub_mat(:,ll+1)');
+        h5write([save_data_name '.h5'],['/t' t_ind '/s' s_ind '/' l_ind '/cells'],data_temp);
     end
 end
-data = data_t;
+
 
 % write xml file
 docNode = com.mathworks.xml.XMLUtils.createDocument('SpimData');
@@ -106,21 +116,4 @@ end
 root.appendChild(viewRegs);
 xmlwrite([save_data_name '.xml'],docNode);
 
-% write hdf5 data
-h5create([save_data_name '.h5'],'/s00/resolutions',size(res_mat));
-h5write([save_data_name '.h5'], '/s00/resolutions', res_mat);
-h5create([save_data_name '.h5'],'/s00/subdivisions',size(sub_mat));
-h5write([save_data_name '.h5'], '/s00/subdivisions', sub_mat);
-l_num = size(res_mat,2);
-for tt = 0:time_num-1
-    t_ind = num2str(100000+tt);
-    t_ind = t_ind(2:end);
-    s_ind = '00';
-    for ll = 0:l_num-1
-        l_ind = num2str(ll);
-        data_temp = imresize3(data(:,:,:,tt+1),round(size(data(:,:,:,tt+1))./res_mat(:,ll+1)'));
-        h5create([save_data_name '.h5'],['/t' t_ind '/s' s_ind '/' l_ind '/cells'],...
-            size(data_temp),'Datatype','uint16','ChunkSize',sub_mat(:,ll+1)');
-        h5write([save_data_name '.h5'],['/t' t_ind '/s' s_ind '/' l_ind '/cells'],data_temp);
-    end
-end
+
