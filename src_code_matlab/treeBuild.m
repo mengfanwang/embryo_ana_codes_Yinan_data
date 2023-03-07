@@ -19,7 +19,7 @@ if dir_idx==0 || dir_idx == 2
         kids = cat(1, movieInfo.kids{pre_nodes});
         if ~isempty(kids)
             tree_nodes = cat(1, tree_nodes, kids);
-            pre_nodes = kids;
+            pre_nodes = unique(kids);
         else
             break;
         end
@@ -58,7 +58,7 @@ if dir_idx==1 || dir_idx == 2
         parents = cat(1, movieInfo.parents{pre_nodes});
         if ~isempty(parents)
             tree_nodes = cat(1, tree_nodes, parents);
-            pre_nodes = parents;
+            pre_nodes = unique(parents);
         else
             break;
         end

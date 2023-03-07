@@ -47,11 +47,11 @@ if isunix
         %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_72_91_1116');
         
         % 50-149 frames using mengfan's registration
-        timepts_to_process = generate_tps_str(50:149);
+        timepts_to_process = generate_tps_str(80:99);
 %         timepts_to_process = generate_tps_str(66:71);
         wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_050-149_11_v6/Wei_refine_res";
 %         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/non_rigid_test2';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view11_0307_80_99';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -158,51 +158,54 @@ if ~exist('refine_res','var') % segmentation results
     else
         % the files are saved in dir "synQuant_refine_res"
         if exist('wei_refine_res_folder', 'var')
-            [refine_res, threshold_res] = matfiles2cell(wei_refine_res_folder, ...
-                'synQuant_refine_res', timepts_to_process);
+            [refine_res, threshold_res] = matfiles2cell_scaling(wei_refine_res_folder, ...
+                'synQuant_refine_res', timepts_to_process, sc_f, st_loc, sz_crop);
         else
-            [refine_res, threshold_res] = matfiles2cell(fullfile(cell_seg_res_folder, 'synQuant_refine_res'), ...
-                'synQuant_refine_res', timepts_to_process);
+            [refine_res, threshold_res] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_refine_res'), ...
+                'synQuant_refine_res', timepts_to_process, sc_f, st_loc, sz_crop);
         end
     end
 end
 if file_num ~= numel(refine_res)
     warning("The number of segmentation results does not equal to number of files!");
 end
-[h, w, z] = size(refine_res{1});
+% [h, w, z] = size(refine_res{1});
 % org_refine_res = refine_res(1:file_num);
 % org_threshold_res = threshold_res(1:file_num);
-[refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
+% [refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
 
 scale_term = 1000;
 embryo_vid = cell(numel(tif_files), 1); % original data
 for i=1:numel(tif_files)
-    embryo_vid{i} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
-    embryo_vid{i} = 255*embryo_vid{i}./scale_term;
+    embryo_vid_temp{1} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
+    embryo_vid_temp{1} = 255*embryo_vid_temp{1}./scale_term;
+    [~, embryo_vid_temp, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
+    sz_crop, {}, embryo_vid_temp, {}, {}, {}, {});
+    embryo_vid{i} = embryo_vid_temp{1};
 end
-[~, embryo_vid, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, embryo_vid, {}, {}, {}, {});
+clear embryo_vid_temp
+
 
 if ~exist('varMap','var') % segmentation results
     if ~exist(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), "dir")
         load(fullfile(cell_seg_res_folder, 'varianceMap.mat'),'varMap');
     else
-        [varMap, ~] = matfiles2cell(fullfile(cell_seg_res_folder, 'varianceMap'), ...
-            'varianceMap', timepts_to_process);
+        [varMaps, ~] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'varianceMap'), ...
+            'varianceMap', timepts_to_process, sc_f, st_loc, sz_crop);
     end
 end
-[~, ~, ~, ~, varMaps, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, {}, {}, {}, varMap(1:file_num), {});
-clear varMap
+% [~, ~, ~, ~, varMaps, ~] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, {}, {}, {}, {}, varMap(1:file_num), {});
+% clear varMap
 
 if ~exist('eig_res_2d','var') % segmentation results
     if ~exist(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), "dir")
         load(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res.mat'),...
             'eig_res_2d', 'eig_res_3d');
     else
-        [eig_res_2d, eig_res_3d] = matfiles2cell(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
-            'synQuant_priCvt_res', timepts_to_process);
+        [eig_res_2d, eig_res_3d] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
+            'synQuant_priCvt_res', timepts_to_process, sc_f, st_loc, sz_crop);
     end
 end
 eigMaps = cell(file_num,1);
@@ -213,8 +216,8 @@ for i=1:file_num
     eig_res_2d{i} = [];
     eig_res_3d{i} = [];
 end
-[~, ~, ~, ~, ~, eigMaps] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, {}, {}, {}, {}, eigMaps);
+% [~, ~, ~, ~, ~, eigMaps] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, {}, {}, {}, {}, {}, eigMaps);
 % clear eig_res_2d eig_res_3d
 
 %% parameter setting
@@ -223,6 +226,7 @@ g = graphPara_cell(sum(cellfun(@(x) max(x(:)), refine_res)));%1
 % g.translation_path = fullfile(cell_seg_res_folder, tform_name);
 q = initial_q(sc_f, true);
 
+g.timepts_to_process = timepts_to_process;
 g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear';
 % g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear_debug';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
@@ -243,7 +247,8 @@ g.driftInfo.x_batch = x_batch;
 g.driftInfo.z_batch = z_batch;  % vector locations in original image with one padding
 
 %% start tracking
-% q.saveInterMediateRes = true;      % get all resuts
+q.saveInterMediateRes = true;      % get all resuts
+q.save_folder = save_folder;
 diary(fullfile(save_folder, 'log'));
 
 [movieInfo, movieInfoAll, out_refine_res, refine_resAll,...
@@ -260,7 +265,7 @@ if q.saveInterMediateRes
         'movieInfoAll','-v7.3');
     save(fullfile(save_folder, 'refine_res.mat'), 'out_refine_res',...
         'refine_resAll','-v7.3');
-    save(fullfile(save_folder, 'threshold_res.mat'), threshold_res,...
+    save(fullfile(save_folder, 'threshold_res.mat'), 'threshold_res',...
         'threshold_resAll','-v7.3');
 else
     save(fullfile(save_folder, 'movieInfo.mat'), 'movieInfo', '-v7.3');
@@ -277,7 +282,7 @@ if ~exist(mastodon_dir)
 end
 addpath('TGMM_wrapper/');
 mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
-tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'));
+tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process);
 %% stop here
 return;
 %% save seg data for Yinan

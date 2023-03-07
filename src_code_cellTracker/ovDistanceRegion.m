@@ -121,7 +121,7 @@ if ~ovFlag % after downsampling, we can use this method to cal distance
             distances_n2c_way5 = dist2cell1(cell2_idx);%sqrt(dist2cell1(cell2_idx));
             dist2cell2 = edt_3dMex(mov_cell, ref_cell, -mov_shift);
             distances_c2n_way5 = dist2cell2(cell1_idx);%sqrt(dist2cell2(cell1_idx));
-            if false%q.sqrtDistance
+            if true %q.sqrtDistance
                 distances_n2c_way5 = sqrt(distances_n2c_way5);
                 distances_c2n_way5 = sqrt(distances_c2n_way5);
             end

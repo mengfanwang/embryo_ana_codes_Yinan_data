@@ -17,11 +17,11 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(100:191);
+        timepts_to_process = generate_tps_str(0:191);
 %         timepts_to_process = generate_tps_str(66:71);
         wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_10/Wei_refine_res";
 %         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0228_100_191';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0303_000_191';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -89,51 +89,54 @@ if ~exist('refine_res','var') % segmentation results
     else
         % the files are saved in dir "synQuant_refine_res"
         if exist('wei_refine_res_folder', 'var')
-            [refine_res, threshold_res] = matfiles2cell(wei_refine_res_folder, ...
-                'synQuant_refine_res', timepts_to_process);
+            [refine_res, threshold_res] = matfiles2cell_scaling(wei_refine_res_folder, ...
+                'synQuant_refine_res', timepts_to_process, sc_f, st_loc, sz_crop);
         else
-            [refine_res, threshold_res] = matfiles2cell(fullfile(cell_seg_res_folder, 'synQuant_refine_res'), ...
-                'synQuant_refine_res', timepts_to_process);
+            [refine_res, threshold_res] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_refine_res'), ...
+                'synQuant_refine_res', timepts_to_process, sc_f, st_loc, sz_crop);
         end
     end
 end
 if file_num ~= numel(refine_res)
     warning("The number of segmentation results does not equal to number of files!");
 end
-[h, w, z] = size(refine_res{1});
+% [h, w, z] = size(refine_res{1});
 % org_refine_res = refine_res(1:file_num);
 % org_threshold_res = threshold_res(1:file_num);
-[refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
+% [refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
 
 scale_term = 1000;
 embryo_vid = cell(numel(tif_files), 1); % original data
 for i=1:numel(tif_files)
-    embryo_vid{i} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
-    embryo_vid{i} = 255*embryo_vid{i}./scale_term;
+    embryo_vid_temp{1} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
+    embryo_vid_temp{1} = 255*embryo_vid_temp{1}./scale_term;
+    [~, embryo_vid_temp, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
+    sz_crop, {}, embryo_vid_temp, {}, {}, {}, {});
+    embryo_vid{i} = embryo_vid_temp{1};
 end
-[~, embryo_vid, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, embryo_vid, {}, {}, {}, {});
+clear embryo_vid_temp
+
 
 if ~exist('varMap','var') % segmentation results
     if ~exist(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), "dir")
         load(fullfile(cell_seg_res_folder, 'varianceMap.mat'),'varMap');
     else
-        [varMap, ~] = matfiles2cell(fullfile(cell_seg_res_folder, 'varianceMap'), ...
-            'varianceMap', timepts_to_process);
+        [varMaps, ~] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'varianceMap'), ...
+            'varianceMap', timepts_to_process, sc_f, st_loc, sz_crop);
     end
 end
-[~, ~, ~, ~, varMaps, ~] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, {}, {}, {}, varMap(1:file_num), {});
-clear varMap
+% [~, ~, ~, ~, varMaps, ~] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, {}, {}, {}, {}, varMap(1:file_num), {});
+% clear varMap
 
 if ~exist('eig_res_2d','var') % segmentation results
     if ~exist(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), "dir")
         load(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res.mat'),...
             'eig_res_2d', 'eig_res_3d');
     else
-        [eig_res_2d, eig_res_3d] = matfiles2cell(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
-            'synQuant_priCvt_res', timepts_to_process);
+        [eig_res_2d, eig_res_3d] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
+            'synQuant_priCvt_res', timepts_to_process, sc_f, st_loc, sz_crop);
     end
 end
 eigMaps = cell(file_num,1);
@@ -144,8 +147,8 @@ for i=1:file_num
     eig_res_2d{i} = [];
     eig_res_3d{i} = [];
 end
-[~, ~, ~, ~, ~, eigMaps] = data_scaling(sc_f, st_loc, ...
-    sz_crop, {}, {}, {}, {}, {}, eigMaps);
+% [~, ~, ~, ~, ~, eigMaps] = data_scaling(sc_f, st_loc, ...
+%     sz_crop, {}, {}, {}, {}, {}, eigMaps);
 % clear eig_res_2d eig_res_3d
 
 %% parameter setting
@@ -193,7 +196,7 @@ if q.saveInterMediateRes
         'movieInfoAll','-v7.3');
     save(fullfile(save_folder, 'refine_res.mat'), 'out_refine_res',...
         'refine_resAll','-v7.3');
-    save(fullfile(save_folder, 'threshold_res.mat'), threshold_res,...
+    save(fullfile(save_folder, 'threshold_res.mat'), 'threshold_res',...
         'threshold_resAll','-v7.3');
 else
     save(fullfile(save_folder, 'movieInfo.mat'), 'movieInfo', '-v7.3');

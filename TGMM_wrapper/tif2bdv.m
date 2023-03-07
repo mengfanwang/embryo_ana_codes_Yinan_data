@@ -26,8 +26,8 @@ l_num = size(res_mat,2);
 % read tif file
 % tif_files = dir(fullfile(tif_folder_path, '*.tif'));
 % time_num = numel(tif_files);
-% time_num = 192; %temp
-for tt = 1:length(timepts_to_process)
+time_num = length(timepts_to_process);
+for tt = 1:time_num
     fprintf('Writing time %d\n', tt);
 
     data = tifread(fullfile(tif_folder_path, timepts_to_process(tt)+'.tif'));
