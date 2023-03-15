@@ -1,11 +1,12 @@
-% clc
-movieInfo = movieInfoAll{1};
+clc
+movieInfo = movieInfoAll{17};
 
 
-query = [984.6 393.3 71.6];
+query = [1231 455.2 84.5];
 [ii, track] = findPoint(query, movieInfo);
 
-query = [969.6 404.3 72.5];
+query = [1220.1 463.5 84.9];
+% query = [660.2 269.4 67.7];
 [jj, ~] = findPoint(query, movieInfo);
 % movieInfo.tracks{track} 
 % movieInfo.nei{point}

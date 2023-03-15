@@ -17,11 +17,11 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(0:191);
+        timepts_to_process = generate_tps_str(100:120);
 %         timepts_to_process = generate_tps_str(66:71);
         wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_10/Wei_refine_res";
 %         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0303_000_191';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0313_100_120';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);

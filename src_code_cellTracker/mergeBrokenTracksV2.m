@@ -12,10 +12,20 @@ movieInfo = relinkJumpOveredCell(movieInfo, g);
 intrack_distance = cell(numel(movieInfo.parents),1);
 for i=1:numel(movieInfo.parents)
     if ~isempty(movieInfo.parents{i})% does not consider drift?
-        xd = movieInfo.xCoord(movieInfo.parents{i})-movieInfo.xCoord(i);
-        yd = movieInfo.yCoord(movieInfo.parents{i})-movieInfo.yCoord(i);
-        zd = movieInfo.zCoord(movieInfo.parents{i})-movieInfo.zCoord(i);
-        intrack_distance{i} = sqrt(xd.^2 + yd.^2 + zd.^2);
+%         xd = movieInfo.xCoord(movieInfo.parents{i})-movieInfo.xCoord(i);
+%         yd = movieInfo.yCoord(movieInfo.parents{i})-movieInfo.yCoord(i);
+%         zd = movieInfo.zCoord(movieInfo.parents{i})-movieInfo.zCoord(i);
+%         intrack_distance{i} = sqrt(xd.^2 + yd.^2 + zd.^2);
+
+        parent_frame = movieInfo.frames(movieInfo.parents{i});
+        child_frame = movieInfo.frames(i);
+        xd = movieInfo.xCoord(movieInfo.parents{i});
+        yd = movieInfo.yCoord(movieInfo.parents{i});
+        zd = movieInfo.zCoord(movieInfo.parents{i});
+        parent_loc = [xd yd zd];
+        child_loc = [movieInfo.xCoord(i) movieInfo.yCoord(i) movieInfo.zCoord(i)];
+        frame_shift = getNonRigidDrift(parent_loc, child_loc, parent_frame, child_frame, movieInfo.drift, g.driftInfo);
+        intrack_distance{i} = norm(child_loc - parent_loc - frame_shift);
     end
 end
 intrack_distance = cat(1, intrack_distance{:});
@@ -70,10 +80,25 @@ for i=1:numel(movieInfo_trackLet.nei)
             jump_punish = ...
                 movieInfo.jumpRatio(movieInfo_trackLet.frames(cur_nei)-...
                 movieInfo_trackLet.frames(i));
-            xd = movieInfo_trackLet.xCoord(i)-movieInfo_trackLet.xCoord(cur_nei);
-            yd = movieInfo_trackLet.yCoord(i)-movieInfo_trackLet.yCoord(cur_nei);
-            zd = movieInfo_trackLet.zCoord(i)-movieInfo_trackLet.zCoord(cur_nei);
-            movieInfo_trackLet.CDist{i} = sqrt(xd.^2 + yd.^2 + zd.^2);
+%             xd = movieInfo_trackLet.xCoord(i)-movieInfo_trackLet.xCoord(cur_nei);
+%             yd = movieInfo_trackLet.yCoord(i)-movieInfo_trackLet.yCoord(cur_nei);
+%             zd = movieInfo_trackLet.zCoord(i)-movieInfo_trackLet.zCoord(cur_nei);
+%             movieInfo_trackLet.CDist{i} = sqrt(xd.^2 + yd.^2 + zd.^2);
+            
+            parent_frame = movieInfo_trackLet.frames(i);
+            child_frame = movieInfo_trackLet.frames(cur_nei);
+            xd = movieInfo_trackLet.xCoord(i);
+            yd = movieInfo_trackLet.yCoord(i);
+            zd = movieInfo_trackLet.zCoord(i);
+            parent_loc = [xd yd zd];
+            xd = movieInfo_trackLet.xCoord(cur_nei);
+            yd = movieInfo_trackLet.yCoord(cur_nei);
+            zd = movieInfo_trackLet.zCoord(cur_nei);
+            child_loc = [xd yd zd];
+
+            frame_shift = getNonRigidDrift(parent_loc, child_loc, parent_frame, child_frame, movieInfo.drift, g.driftInfo);
+            movieInfo_trackLet.CDist{i} = norm(child_loc - parent_loc - frame_shift);
+
             movieInfo_trackLet.Cij{i} = overlap2cost(...
                 movieInfo_trackLet.CDist{i}, phat, jump_punish);
         end

@@ -18,9 +18,9 @@ if isnan(p_id) || isnan(k_id)% starting point
     else
         error('at least one element in parent_kid_vec should be valid!');
     end
-    if find(thres==0,1)
-        keyboard;
-    end
+%     if find(thres==0,1)
+%         keyboard;
+%     end
     if isempty(thres(thres>0)) %|| thres == 0
         seed_region = [];
         return;

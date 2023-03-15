@@ -47,11 +47,11 @@ if isunix
         %save_folder = fullfile(home_folder, 'Desktop/embryo_res_folder/mengfan_data_res/mengfan_single_view_72_91_1116');
         
         % 50-149 frames using mengfan's registration
-        timepts_to_process = generate_tps_str(80:99);
+        timepts_to_process = generate_tps_str(70:89);
 %         timepts_to_process = generate_tps_str(66:71);
         wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_050-149_11_v6/Wei_refine_res";
 %         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view11_0307_80_99';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view11_0309_70_89';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);

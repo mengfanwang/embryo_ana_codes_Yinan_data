@@ -128,14 +128,14 @@ while 1
         embryo_vid, eigMaps, varMaps, g, q);
     loopCnt = loopCnt + 1;
 
-    % save temporary result
-    movieInfo_tmp.n_perframe = movieInfo.n_perframe;
-    movieInfo_tmp.xCoord = movieInfo.xCoord;
-    movieInfo_tmp.yCoord = movieInfo.yCoord;
-    movieInfo_tmp.zCoord = movieInfo.zCoord;
-    movieInfo_tmp.tracks = movieInfo.tracks;
-    movieInfo_tmp.parents = movieInfo.parents;
-    save(fullfile(q.save_folder, ['movieInfo_tmp_' num2str(loopCnt) '.mat']), 'movieInfo_tmp', '-v7.3');
+%     % save temporary result
+%     movieInfo_tmp.n_perframe = movieInfo.n_perframe;
+%     movieInfo_tmp.xCoord = movieInfo.xCoord;
+%     movieInfo_tmp.yCoord = movieInfo.yCoord;
+%     movieInfo_tmp.zCoord = movieInfo.zCoord;
+%     movieInfo_tmp.tracks = movieInfo.tracks;
+%     movieInfo_tmp.parents = movieInfo.parents;
+%     save(fullfile(q.save_folder, ['movieInfo_tmp_' num2str(loopCnt) '.mat']), 'movieInfo_tmp', '-v7.3');
 
     if loopCnt > g.maxIter
         break;
