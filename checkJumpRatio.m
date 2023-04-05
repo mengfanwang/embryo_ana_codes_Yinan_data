@@ -1,5 +1,5 @@
-movieInfo = m191.movieInfo;
-% movieInfo = movieInfoAll{17};
+% movieInfo = m191.movieInfo;
+movieInfo = movieInfoAll{15};
                                 
 
 %% check jump num
@@ -10,9 +10,9 @@ for ii = 1:length(movieInfo.tracks)
         jumpNum(jumpTmp(jj)) = jumpNum(jumpTmp(jj)) + 1;
     end
 end
-jumpNum = jumpNum/sum(jumpNum);
+% jumpNum = jumpNum/sum(jumpNum);
 
-jumpNum
+% jumpNum
 
 1-jumpNum(1)
 

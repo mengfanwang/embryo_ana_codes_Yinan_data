@@ -1,9 +1,9 @@
 function phat = fitTruncGamma(data)
 
 
-%!!!: let's see if we directly use gamma
-phat = gamfit(data);
-return
+% %!!!: let's see if we directly use gamma
+% phat = gamfit(data);
+% return
 disp_gap = 0.03;
 % data = clsstSftOvrlpDist;
 data(data==0) = [];

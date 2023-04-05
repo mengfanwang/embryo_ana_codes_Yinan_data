@@ -23,6 +23,7 @@ if isfield(g,'use_translation_as_drift')
         g.translation = InitialDriftEstimate(embryo_vid);
     end
 end
+g.loopCnt = 0;
 
 movieInfoAll = cell(g.maxIter * 3 + 2,1);
 refine_resAll = cell(g.maxIter * 3 + 2,1);
@@ -90,6 +91,7 @@ end
 %% iterative update transition cost start
 % the initial result from min-cost flow
 loopCnt = 1;
+g.loopCnt = loopCnt;
 % [movieInfo, refine_res, threshold_res, g] = ...
 %         missing_cell_module(movieInfo, refine_res, threshold_res, ...
 %         embryo_vid, eigMaps, varMaps, g, q);
@@ -104,38 +106,33 @@ while 1
     %         unique(refine_res{3}(movieInfo.voxIdx{id}))]);
     tic;
     for dummy = 1:3
-        %% save intermediate results
+        % save intermediate results
         res_cnt = res_cnt + 1;
         if q.saveInterMediateRes
             refine_resAll{res_cnt} = refine_res;
             threshold_resAll{res_cnt} = threshold_res;
         end
-        %% module one: split/merge (optional: remove small regions)
+        % module one: split/merge (optional: remove small regions)
         [movieInfo, refine_res, threshold_res, g, movieInfo_noJump] = ...
             split_merge_module(movieInfo, refine_res, threshold_res, ...
             embryo_vid, eigMaps, g, q);
 
-        %% save intermediate results
+        % save intermediate results
         if q.saveInterMediateRes
             movieInfoAll{res_cnt} = movieInfo_noJump;
         end
 
     end
     toc;
-    %% module two: missing cells (optional: remove short tracks)
+    % module two: missing cells (optional: remove short tracks) 
     [movieInfo, refine_res, threshold_res, g] = ...
         missing_cell_module(movieInfo, refine_res, threshold_res, ...
         embryo_vid, eigMaps, varMaps, g, q);
+    fprintf('JumpRatio: %f %f %f\n', movieInfo.jumpRatio(1), ...
+        movieInfo.jumpRatio(2), movieInfo.jumpRatio(3));
+    
     loopCnt = loopCnt + 1;
-
-%     % save temporary result
-%     movieInfo_tmp.n_perframe = movieInfo.n_perframe;
-%     movieInfo_tmp.xCoord = movieInfo.xCoord;
-%     movieInfo_tmp.yCoord = movieInfo.yCoord;
-%     movieInfo_tmp.zCoord = movieInfo.zCoord;
-%     movieInfo_tmp.tracks = movieInfo.tracks;
-%     movieInfo_tmp.parents = movieInfo.parents;
-%     save(fullfile(q.save_folder, ['movieInfo_tmp_' num2str(loopCnt) '.mat']), 'movieInfo_tmp', '-v7.3');
+    g.loopCnt = loopCnt;
 
     if loopCnt > g.maxIter
         break;

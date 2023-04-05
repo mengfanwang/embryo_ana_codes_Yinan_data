@@ -29,7 +29,8 @@ for i=1:numel(movieInfo.parents)
     end
 end
 intrack_distance = cat(1, intrack_distance{:});
-phat = fitTruncGamma(intrack_distance);
+% % phat = fitTruncGamma(intrack_distance);
+phat = gamfit(intrack_distance);
 % find track head and tails
 track_heads = find(cellfun(@length, movieInfo.parents)==0);
 track_heads(track_heads>length(movieInfo.xCoord)) = [];
@@ -77,8 +78,10 @@ for i=1:numel(movieInfo_trackLet.nei)
         cur_nei = cur_nei(~isnan(cur_nei));
         movieInfo_trackLet.nei{i} = cur_nei;
         if ~isempty(cur_nei)
+
+            jumpRatio = [1 0 0];
             jump_punish = ...
-                movieInfo.jumpRatio(movieInfo_trackLet.frames(cur_nei)-...
+                jumpRatio(movieInfo_trackLet.frames(cur_nei)-...
                 movieInfo_trackLet.frames(i));
 %             xd = movieInfo_trackLet.xCoord(i)-movieInfo_trackLet.xCoord(cur_nei);
 %             yd = movieInfo_trackLet.yCoord(i)-movieInfo_trackLet.yCoord(cur_nei);

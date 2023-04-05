@@ -17,11 +17,11 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(100:120);
-%         timepts_to_process = generate_tps_str(66:71);
-        wei_refine_res_folder = "/work/public/sameViewFusion/sameViewDetection_10/Wei_refine_res";
-%         wei_refine_res_folder = '/work/public/sameViewFusion/sameViewDetection_050-149_11_debug/Wei_refine_res';
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0313_100_120';
+        timepts_to_process = generate_tps_str(170:191);
+%         timepts_to_process = generate_tps_str(0:14);
+        wei_refine_res_folder = "/ssd1/Mengfan/sameViewDetection_10/Wei_refine_res";
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0329_170_191_crop2';
+%         save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0323_000_014';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -48,8 +48,8 @@ if cropped_flag
     cell_seg_res_folder = save_folder;
 else
 
-     data_folder = '/work/public/sameViewFusion/sameViewFusion_10';
-     cell_seg_res_folder = '/work/public/sameViewFusion/sameViewDetection_10';
+     data_folder = '/ssd1/Mengfan/sameViewFusion_10';
+     cell_seg_res_folder = '/ssd1/Mengfan/sameViewDetection_10';
 
 end
 if ~exist(cell_seg_res_folder,'dir')
@@ -65,8 +65,8 @@ sc_f = 2; % we resize the data to [h/sc_f, w/sc_f, z, t]
 
 st_loc = [];
 sz_crop = [];
-% st_loc = [251, 1, 1];
-% sz_crop = [200, 250, z];
+st_loc = [501, 1001, 101]
+sz_crop = [250, 250, 50]
 gt_mat_org = {};
 
 % read files
@@ -170,15 +170,24 @@ if g.applyDrift2allCoordinate
     error('Non-rigid version doesn''t accept the option.');
 end
 [y_batch, x_batch, z_batch] = meshgrid(0:g.driftInfo.grid_size+1);
-y_batch = y_batch*g.driftInfo.batch_size(2) + 0.5 - g.driftInfo.batch_size(2)/2;
-x_batch = x_batch*g.driftInfo.batch_size(1) + 0.5 - g.driftInfo.batch_size(1)/2;
-z_batch = z_batch*g.driftInfo.batch_size(3) + 0.5 - g.driftInfo.batch_size(3)/2;
+if ~isempty(st_loc)  % adjust if crop
+    y_batch = y_batch*g.driftInfo.batch_size(2) + 0.5 - g.driftInfo.batch_size(2)/2 - st_loc(2)/sc_f;
+    x_batch = x_batch*g.driftInfo.batch_size(1) + 0.5 - g.driftInfo.batch_size(1)/2 - st_loc(1)/sc_f;
+    z_batch = z_batch*g.driftInfo.batch_size(3) + 0.5 - g.driftInfo.batch_size(3)/2 - st_loc(3);
+else
+    y_batch = y_batch*g.driftInfo.batch_size(2) + 0.5 - g.driftInfo.batch_size(2)/2;
+    x_batch = x_batch*g.driftInfo.batch_size(1) + 0.5 - g.driftInfo.batch_size(1)/2;
+    z_batch = z_batch*g.driftInfo.batch_size(3) + 0.5 - g.driftInfo.batch_size(3)/2;
+end
 g.driftInfo.y_batch = y_batch;
 g.driftInfo.x_batch = x_batch;
 g.driftInfo.z_batch = z_batch;  % vector locations in original image with one padding
 
 %% start tracking
-% q.saveInterMediateRes = true;      % get all resuts
+q.saveInterMediateRes = true;      % get all resuts
+if length(timepts_to_process) > 40
+    q.saveInterMediateRes = false;
+end
 q.save_folder = save_folder;
 diary(fullfile(save_folder, 'log'));
 
@@ -213,7 +222,7 @@ if ~exist(mastodon_dir)
 end
 addpath('TGMM_wrapper/');
 mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
-tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process);
+tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
 %% stop here
 return;
 %% save seg data for Yinan

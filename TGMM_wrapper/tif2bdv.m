@@ -1,4 +1,4 @@
-function tif2bdv(tif_folder_path, save_data_name, timepts_to_process)
+function tif2bdv(tif_folder_path, save_data_name, timepts_to_process, st_loc, sz_crop)
 % tif files to mastodon accepted data format
 
 % clc;clear;close all;
@@ -9,6 +9,11 @@ function tif2bdv(tif_folder_path, save_data_name, timepts_to_process)
 % else
 %     tif_folder_path = 'E:\Embryo\registration_temporal_data\PointReg';
 % end
+
+%%% scaling setting %%%
+if ~isempty(st_loc)
+    end_loc = st_loc + sz_crop - 1;
+end
 
 %%% parameter %%%
 view_num = 1;
@@ -31,6 +36,10 @@ for tt = 1:time_num
     fprintf('Writing time %d\n', tt);
 
     data = tifread(fullfile(tif_folder_path, timepts_to_process(tt)+'.tif'));
+    if ~isempty(st_loc)
+        data = data(st_loc(1):end_loc(1), ...
+               st_loc(2):end_loc(2),st_loc(3):end_loc(3));
+    end
     [x,y,z] = size(data);
     % data transform
     data_t = zeros(y,x,z);
@@ -70,7 +79,7 @@ imLoader = docNode.createElement('ImageLoader');
 imLoader.setAttribute('format','bdv.hdf5');
 hdf5 = docNode.createElement('hdf5');
 hdf5.setAttribute('type','relative');
-hdf5.appendChild(docNode.createTextNode([save_data_name '.h5']));
+hdf5.appendChild(docNode.createTextNode('embryo_data_h5.h5'));
 imLoader.appendChild(hdf5);
 seqDes.appendChild(imLoader);
 

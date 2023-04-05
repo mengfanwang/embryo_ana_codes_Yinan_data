@@ -1,24 +1,26 @@
 clc
-movieInfo = movieInfoAll{17};
+% movieInfo = movieInfoAll{end};
 
 
-query = [1231 455.2 84.5];
+query = [1320.7 1094.3 127.1];
 [ii, track] = findPoint(query, movieInfo);
 
-query = [1220.1 463.5 84.9];
-% query = [660.2 269.4 67.7];
-[jj, ~] = findPoint(query, movieInfo);
+query = [1330.5 1112.3 126.2];
+% query = [1099.92020000000	621.818800000000	723.073018000000];
+[jj, track2] = findPoint(query, movieInfo);
 % movieInfo.tracks{track} 
-% movieInfo.nei{point}
+% movieInfo.nei{point}[
 % movieInfo.frames(movieInfo.nei{point})
 % movieInfo.CDist{point}
 
 function [point, track] = findPoint(query, movieInfo)
     query = query.*[0.5 0.5 1] + 1;
+%     query = query.*[0.5 0.5 1/5.86] + 1;
     first_min = inf;
     second_min = inf;
     for ii = 1:length(movieInfo.xCoord)
-        current_dist = norm(query - movieInfo.orgCoord(ii,:));
+%         current_dist = norm(query - movieInfo.orgCoord(ii,:));
+        current_dist = norm(query - [movieInfo.xCoord(ii) movieInfo.yCoord(ii) movieInfo.zCoord(ii)]);
         if current_dist < first_min
             second_min = first_min;
             first_min = current_dist;

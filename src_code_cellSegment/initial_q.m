@@ -29,8 +29,8 @@ q.fgBoundaryHandle = 'leaveAloneFirst'; % leaveAloneFirst, compete or repeat:
 q.saveInterMediateRes = false;
 % If we scaled the data
 if scaling ~= 1
-    q.minSize = q.minSize/scaling;% cell size
-    q.minSeedSize = q.minSeedSize/scaling; % seed size
+    q.minSize = q.minSize/scaling^2;% cell size
+    q.minSeedSize = q.minSeedSize/scaling^2; % seed size
     q.shift = floor(q.shift/scaling);
 end
 if tracking_flag
