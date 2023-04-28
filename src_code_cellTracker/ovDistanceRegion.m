@@ -17,6 +17,11 @@ elseif nargin < 4
     ovFlag = false;
 end
 
+% resolution = [1 1 5.86];
+% curRegVox = round(curRegVox.*resolution);
+% nextRegVox = round(nextRegVox.*resolution);
+% frame_shift = frame_shift.*resolution;
+
 re_ratio = 0;
 if ~ovFlag % after downsampling, we can use this method to cal distance
     if size(nextRegVox,1) < 2 || size(curRegVox,1) < 2 % less than 2 pixels

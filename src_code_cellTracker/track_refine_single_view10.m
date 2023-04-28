@@ -17,10 +17,10 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(170:191);
-%         timepts_to_process = generate_tps_str(0:14);
+%         timepts_to_process = generate_tps_str(170:191);
+        timepts_to_process = generate_tps_str(0:191);
         wei_refine_res_folder = "/ssd1/Mengfan/sameViewDetection_10/Wei_refine_res";
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0329_170_191_crop2';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0424_000_191';
 %         save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0323_000_014';
     end
     if ~exist(save_folder,'dir')
@@ -59,14 +59,14 @@ end
 
 %% data preparation
 profile off;
-profile on;
+% profile on;
 % First downsample the detection results if any
 sc_f = 2; % we resize the data to [h/sc_f, w/sc_f, z, t]
 
 st_loc = [];
 sz_crop = [];
-st_loc = [501, 1001, 101]
-sz_crop = [250, 250, 50]
+% st_loc = [501, 1001, 101]
+% sz_crop = [250, 250, 50]
 gt_mat_org = {};
 
 % read files
@@ -135,8 +135,10 @@ if ~exist('eig_res_2d','var') % segmentation results
         load(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res.mat'),...
             'eig_res_2d', 'eig_res_3d');
     else
-        [eig_res_2d, eig_res_3d] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
-            'synQuant_priCvt_res', timepts_to_process, sc_f, st_loc, sz_crop);
+%         [eig_res_2d, eig_res_3d] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'synQuant_priCvt_res'), ...
+%             'synQuant_priCvt_res', timepts_to_process, sc_f, st_loc, sz_crop);
+        [eig_res_2d, eig_res_3d] = matfiles2cell_scaling(fullfile(cell_seg_res_folder, 'Wei_priCvt_res'), ...
+            'Wei_priCvt_res', timepts_to_process, sc_f, st_loc, sz_crop);
     end
 end
 eigMaps = cell(file_num,1);
@@ -162,6 +164,7 @@ g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view10_l
 % g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear_debug';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
 g.driftInfo.batch_size = [30 30 6];
+% g.resolution = [1 1 5.86];
 
 if ~all(g.driftInfo.grid_size .*g.driftInfo.batch_size == [960 960 192])
     error('Incorrect drift info.');
@@ -195,7 +198,7 @@ diary(fullfile(save_folder, 'log'));
     threshold_res, threshold_resAll] = .... 
     mcfTracking_cell(refine_res, embryo_vid, threshold_res, ...
     varMaps, eigMaps, g, q);
-profile viewer;
+% profile viewer;
 
 %% save results
 %display_rgb_time_course(out_refine_res);

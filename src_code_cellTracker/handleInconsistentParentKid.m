@@ -20,7 +20,7 @@ sep_idx_p = movieInfo.voxIdx(movieInfo.parents{test_cell});
 if ~v_p
     % second try: use intersection as seed regions to separate
     gapBased = false;
-    [v_p, ~] = bisectValidTest(...
+    [v_p, ~, mp1, mp2] = bisectValidTest(...
         cur_idx, cur_frame, sep_idx_p, sep_frame_p, movieInfo, ...
         vidMap, refine_res, eigMaps, gapMaps, g, q, gapBased);
 end
@@ -35,13 +35,18 @@ sep_idx_k = movieInfo.voxIdx(movieInfo.kids{test_cell});
 if ~v_k
     % second try: use intersection as seed regions to separate
     gapBased = false;
-    [v_k, ~] = bisectValidTest(...
+    [v_k, ~, mk1, mk2] = bisectValidTest(...
         cur_idx, cur_frame, sep_idx_k, sep_frame_k, movieInfo, ...
         vidMap, refine_res, eigMaps, gapMaps, g, q, gapBased);
 end
 flag = nan;
 if v_p && v_k % there is segmentation error, not shifting
-    flag = merge_both_parents_kids;
+%     flag = merge_both_parents_kids;
+    if max(mp1, mp2) > max(mk1, mk2)
+        flag = split_by_kids;
+    else
+        flag = split_by_parents;
+    end
 elseif v_p % more possibly there is shifting/segmentaion error in kids
     flag = split_by_parents;
 elseif v_k % more possibly there is shifting/segmentaion error in parents

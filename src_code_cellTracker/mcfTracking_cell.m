@@ -143,7 +143,7 @@ end
 [~, g, dat_in] = trackGraphBuilder_cell(movieInfo, g);
 movieInfo = mccTracker(dat_in, movieInfo, g);
 % !!! LAST: test if broken tracks can be merged
-movieInfo = mergeBrokenTracksV2(movieInfo, g);
+movieInfo = mergeBrokenTracksV3(movieInfo, g);
 res_cnt = res_cnt + 1;
 if q.saveInterMediateRes
     refine_resAll{res_cnt} = refine_res;
