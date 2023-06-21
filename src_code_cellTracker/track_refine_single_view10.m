@@ -17,10 +17,10 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-%         timepts_to_process = generate_tps_str(170:191);
         timepts_to_process = generate_tps_str(0:191);
+%         timepts_to_process = generate_tps_str(121:160);
         wei_refine_res_folder = "/ssd1/Mengfan/sameViewDetection_10/Wei_refine_res";
-        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0424_000_191';
+        save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0530_000_191';
 %         save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0323_000_014';
     end
     if ~exist(save_folder,'dir')
@@ -106,7 +106,7 @@ end
 % [refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
 %     sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
 
-scale_term = 1000;
+scale_term = 500;
 embryo_vid = cell(numel(tif_files), 1); % original data
 for i=1:numel(tif_files)
     embryo_vid_temp{1} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
@@ -188,7 +188,7 @@ g.driftInfo.z_batch = z_batch;  % vector locations in original image with one pa
 
 %% start tracking
 q.saveInterMediateRes = true;      % get all resuts
-if length(timepts_to_process) > 40
+if length(timepts_to_process) > 30
     q.saveInterMediateRes = false;
 end
 q.save_folder = save_folder;

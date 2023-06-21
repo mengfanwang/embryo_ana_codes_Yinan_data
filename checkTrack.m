@@ -1,12 +1,17 @@
 clc
 % given the cell location, find the cell id and the track id
 
-% movieInfo = movieInfoAll{end};
+% movieInfo = movieInfoAll{1};
 
 
-query = [468.879100000000	179.084100000000	95.3784000000000];
+query = [119.8 288.3 17];
 [ii, track] = findPoint(query, movieInfo);
 
+query = [117.5 271.0 17.3];
+[jj, track] = findPoint(query, movieInfo);
+
+% query = [193.78260000000	231.260900000000	16.500000000000];
+% [ii, track] = findPoint(query, movieInfo);
 % query = [175.9 78.2 3.1];
 % query = [1099.92020000000	621.818800000000	723.073018000000];
 % [jj, track2] = findPoint(query, movieInfo);
@@ -16,7 +21,7 @@ query = [468.879100000000	179.084100000000	95.3784000000000];
 % movieInfo.CDist{point}
 
 function [point, track] = findPoint(query, movieInfo)
-%     query = query.*[0.5 0.5 1] + 1;
+    query = query.*[0.5 0.5 1] + 1;
 %     query = query.*[0.5 0.5 1/5.86] + 1;
     first_min = inf;
     second_min = inf;

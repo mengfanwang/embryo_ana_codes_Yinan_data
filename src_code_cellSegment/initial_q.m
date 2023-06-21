@@ -42,7 +42,7 @@ if tracking_flag
     q.growSeedinTracking = true;
     q.multi_frames_flag = false; % we did not consider multiple frames. Otherwise
     % there may be results dominated by other bright cells
-    q.multiSeedProcess = true; % did we add multiple cells simultaneously or one by one
+    q.multiSeedProcess = false; % did we add multiple cells simultaneously or one by one
     q.splitRegionInTracking = true;
     
     q.updateCellsAdjMissingCell = false;% when add missing cell, do we need to update other regions nearby

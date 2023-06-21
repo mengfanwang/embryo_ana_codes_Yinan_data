@@ -10,7 +10,7 @@ if strcmp(OrSt.imProcMethod, 'stb')
 else
     corrFactor = 1;
 end
-suplb = 30*corrFactor;
+suplb = 40*corrFactor;
 infub = 5*corrFactor;
 step_i = -1*corrFactor;
 

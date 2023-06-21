@@ -3,6 +3,7 @@ function [out_bw, rm_flag, idx] = pickLargestReg(bw, connect, valid_idx)
 if nargin == 2
     valid_idx = [];
 end
+% bw = logical(bw);
 [l,n] = bwlabeln(bw, connect);
 rm_flag = false;
 if n == 1
