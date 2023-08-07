@@ -1,5 +1,5 @@
 function movieInfo = transitCostInitial_cell(det_maps, dets_YXZ, ...
-    voxIdxList, movieInfo, g)
+    voxIdxList, voxList, movieInfo, g)
 %we can learn initial variance and mean of distances between observed object
 %locations and estimated locations from data
 %INPUT:
@@ -22,6 +22,28 @@ neibIdx = cell(g.particleNum, 1);
 CDist = cell(g.particleNum, 1);
 CDist_dirwise = cell(g.particleNum, 1);
 
+%% get non_rigid registration info
+if isfield(g, 'translation_path')  && isfield(g, 'timepts_to_process')
+%     file_list = dir(g.translation_path);
+%     file_list = file_list(3:end);
+    timepts_to_process = g.timepts_to_process(1:end-1);
+    grid_size = g.driftInfo.grid_size;
+    movieInfo.drift.x_grid = cell(length(timepts_to_process),1);
+    movieInfo.drift.y_grid = cell(length(timepts_to_process),1);
+    movieInfo.drift.z_grid = cell(length(timepts_to_process),1);
+    for ii = 1:length(timepts_to_process)
+        load(fullfile(g.translation_path, timepts_to_process(ii)+'.mat'), 'phi_current_vec');
+        x_grid = padarray(reshape(phi_current_vec(1:3:end-2), [grid_size grid_size grid_size]), [1 1 1], 'replicate'); 
+        y_grid = padarray(reshape(phi_current_vec(2:3:end-1), [grid_size grid_size grid_size]), [1 1 1], 'replicate'); 
+        z_grid = padarray(reshape(phi_current_vec(3:3:end), [grid_size grid_size grid_size]), [1 1 1], 'replicate'); 
+        movieInfo.drift.x_grid{ii} = x_grid;
+        movieInfo.drift.y_grid{ii} = y_grid;
+        movieInfo.drift.z_grid{ii} = z_grid;
+    end
+end
+movieInfo.driftInfo = g.driftInfo;  % for conveinent input
+
+%%
 timepts = numel(dets_YXZ);
 curLen = 0;
 for i=1:timepts
@@ -30,13 +52,32 @@ for i=1:timepts
         if j>timepts
             break;
         end
-        if isfield(g, 'translation')
+        
+        % deform later frame to previous time point to find correct neighbors
+        deform_map = det_maps{i};
+        deform_map_size = size(det_maps{i});
+        deform_map_size = deform_map_size([2 1 3]);
+        deform_map(deform_map~=0) = 0;
+        deform_voxIdxList = cell(size(voxIdxList{j}));
+        for kk = 1:length(voxIdxList{j})
+            frame_shift = getNonRigidDrift([0 0 0], voxList{j}{kk}, i, j, movieInfo.drift, g.driftInfo);
+            deform_voxList = voxList{j}{kk} - round(frame_shift);
+            deform_voxList = min(deform_voxList, deform_map_size);
+            deform_voxList = max(deform_voxList, 1);
+            deform_voxList = unique(deform_voxList, 'rows');
+            deform_voxIdxList{kk} = sub2ind(size(det_maps{i}), deform_voxList(:,2), deform_voxList(:,1), deform_voxList(:,3));
+            deform_map(deform_voxIdxList{kk}) = kk;
+        end
+
+        if isfield(g, 'translation')   % not used
             [neighbors, distances, distances_dirWise] = ovDistanceMap(...
                 det_maps{i}, det_maps{j}, voxIdxList{i}, voxIdxList{j},...
                 g.translation(j,:)-g.translation(i,:));
         else
+%             [neighbors, distances, distances_dirWise] = ovDistanceMap(...
+%                 det_maps{i}, det_maps{j}, voxIdxList{i}, voxIdxList{j});
             [neighbors, distances, distances_dirWise] = ovDistanceMap(...
-                det_maps{i}, det_maps{j}, voxIdxList{i}, voxIdxList{j});
+                det_maps{i}, deform_map, voxIdxList{i}, deform_voxIdxList);
         end
         bsIdxLen = sum(movieInfo.n_perframe(1:j-1));
         for nn = 1:numel(neighbors)

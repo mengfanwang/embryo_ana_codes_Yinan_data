@@ -17,9 +17,8 @@ end
 
 %%% parameter %%%
 view_num = 1;
-res_mat = [1 1 1; 2 2 2;];
-res_mat = res_mat';
-sub_mat = 16*ones(3,2);
+res_mat = [1 1 1; 2 2 2;]';
+sub_mat = [16 16 16; 8 8 8]';
 
 % write hdf5 data
 h5create([save_data_name '.h5'],'/s00/resolutions',size(res_mat));

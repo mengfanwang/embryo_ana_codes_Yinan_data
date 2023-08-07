@@ -29,14 +29,14 @@ movieInfoAll = cell(g.maxIter * 3 + 2,1);
 refine_resAll = cell(g.maxIter * 3 + 2,1);
 threshold_resAll = cell(g.maxIter * 3 + 2,1);
 %% information initialization
-[movieInfo, det_YXZ, voxIdxList] = tree2tracks_cell(det_maps, q, false);% false means we do not use existing tracking results
+[movieInfo, det_YXZ, voxIdxList, voxList] = tree2tracks_cell(det_maps, q, false);% false means we do not use existing tracking results
 
 movieInfo.orgCoord = [movieInfo.xCoord, movieInfo.yCoord, ...
     movieInfo.zCoord];
 
 movieInfo.Ci = zeros(g.particleNum,1)+g.observationCost; % use constant as observation cost
 % initial transition cost
-movieInfo = transitCostInitial_cell(det_maps, det_YXZ, voxIdxList, ...
+movieInfo = transitCostInitial_cell(det_maps, det_YXZ, voxIdxList, voxList,...
     movieInfo,g);
 % do a simple linking to estimate the drift of the data
 [~, g, dat_in] = trackGraphBuilder_cell(movieInfo, g);
@@ -96,7 +96,7 @@ g.loopCnt = loopCnt;
 %         missing_cell_module(movieInfo, refine_res, threshold_res, ...
 %         embryo_vid, eigMaps, varMaps, g, q);
 while 1
-    % debug;
+    %% debug;
     %     ii = 2;
     %     id = refine_resAll{ii}{3}(1326231) + sum(movieInfoAll{ii}.n_perframe(1:2));
     %     disp([refine_resAll{ii}{3}(1326231), ...
@@ -133,7 +133,7 @@ while 1
     
     loopCnt = loopCnt + 1;
     g.loopCnt = loopCnt;
-
+    %%
     if loopCnt > g.maxIter
         break;
     end
