@@ -163,6 +163,10 @@ for ii = 1:size(multi_child_list,1)
 
 end
 detect_divPair(logical(parent_remove_flag), :) = [];
+% if multiple divisions connect, only keep the first one
+parent_remove_flag = ismember(detect_divPair(:,1),detect_divPair(:,2))...
+    | ismember(detect_divPair(:,1),detect_divPair(:,3));
+detect_divPair(logical(parent_remove_flag), :) = [];
 
 %% keep annotated cell only for evaluation
 cell_match_list = nan(size(spot_table,1),1);

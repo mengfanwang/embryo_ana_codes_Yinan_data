@@ -12,9 +12,9 @@ if isunix
     addpath('/home/ccwang/Dropbox/cc_ImHandle');  
     
     addpath('src_code_matlab');
-    timepts_to_process = generate_tps_str(100:159);
-    wei_refine_res_folder = "/work/Mengfan/Embryo/23-06-29_Yinan/Detection_view9/Wei_refine_res";
-    save_folder = '/work/Mengfan/Embryo/23-06-29_Yinan/Tracking/view9_0719_100_159_crop';
+    timepts_to_process = generate_tps_str(0:59);
+    wei_refine_res_folder = "/work/Mengfan/Embryo/23-06-29_Yinan2/Detection_view9_rmMem/Wei_refine_res";
+    save_folder = '/work/Mengfan/Embryo/23-06-29_Yinan2/Tracking/view9_0819_000_059_crop';
 
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -32,8 +32,8 @@ addpath('debug_func/');
 addpath('/home/mengfan/ForExecute/ParticleTracking/src_code/');
 addpath('/home/mengfan/ForExecute/ParticleTracking/src_uTrack/');
 % set saving folder
-data_folder = '/work/Mengfan/Embryo/23-06-29_Yinan/view9';
-cell_seg_res_folder = '/work/Mengfan/Embryo/23-06-29_Yinan/Detection_view9';
+data_folder = '/work/Mengfan/Embryo/23-06-29_Yinan2/view9_rmMem';
+cell_seg_res_folder = '/work/Mengfan/Embryo/23-06-29_Yinan2/Detection_view9_rmMem';
 
 if ~exist(cell_seg_res_folder,'dir')
     disp("---> ERROR! None-exist segmentation results!");
@@ -84,11 +84,11 @@ if file_num ~= numel(refine_res)
     warning("The number of segmentation results does not equal to number of files!");
 end
 
-scale_term = 500;
+scale_term = 300;
 embryo_vid = cell(numel(tif_files), 1); % original data
 for i=1:numel(tif_files)
     embryo_vid_temp{1} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
-    embryo_vid_temp{1} = embryo_vid_temp{1} - 200;
+    embryo_vid_temp{1} = embryo_vid_temp{1} - 150;
     embryo_vid_temp{1}(embryo_vid_temp{1}<0) = 0;    % specific for Joaquin data
     embryo_vid_temp{1} = 255*embryo_vid_temp{1}./scale_term;
     [~, embryo_vid_temp, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
@@ -132,7 +132,7 @@ g = graphPara_cell(sum(cellfun(@(x) max(x(:)), refine_res)));%1
 q = initial_q(sc_f, true);
 
 g.timepts_to_process = timepts_to_process;
-g.translation_path = '/work/Mengfan/Embryo/23-06-29_Yinan/Registration';
+g.translation_path = '/work/Mengfan/Embryo/23-06-29_Yinan2/Registration';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
 g.driftInfo.batch_size = [30 30 6];
 % g.resolution = [1 1 5.86];
@@ -196,7 +196,9 @@ if ~exist(mastodon_dir)
 end
 addpath('TGMM_wrapper/');
 mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
-tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
+% tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
+membrane_folder = '/work/Mengfan/Embryo/23-06-29_Yinan2/membrane_fuse1';
+tif2bdv_2channel(membrane_folder, data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
 %% stop here
 return;
 %% save seg data for Yinan
