@@ -10,19 +10,19 @@ data_size = [960 960 181];
 data_template = zeros(data_size);
 cell_num = length(movieInfo.xCoord);
 detect_splitPair = zeros(cell_num,2);
-for ii = 1:cell_num
-    if mod(ii,10000) == 0
-        fprintf('%d / %d\n', ii, cell_num);     
+for cell_id = 1:cell_num
+    if mod(cell_id,10000) == 0
+        fprintf('%d / %d\n', cell_id, cell_num);     
     end
-    [vBin, vIdx, ~, ~] = crop3D(data_template, movieInfo.voxIdx{ii}, [0 0 0]);
-    vBin(ismember(vIdx, movieInfo.voxIdx{ii})) = 1;
+    [vBin, vIdx, ~, ~] = crop3D(data_template, movieInfo.voxIdx{cell_id}, [0 0 0]);
+    vBin(ismember(vIdx, movieInfo.voxIdx{cell_id})) = 1;
     cc = bwconncomp(vBin, 6);
-    if cc.NumObjects == 2 && ~isempty(movieInfo.parents{ii})
+    if cc.NumObjects == 2 && ~isempty(movieInfo.parents{cell_id})
         size_ratio = cellfun(@length, cc.PixelIdxList);
         size_ratio = max(size_ratio) / min(size_ratio);
         if size_ratio < 3
             div_num = div_num+1;
-            detect_splitPair(div_num,:) = [movieInfo.parents{ii} ii];
+            detect_splitPair(div_num,:) = [movieInfo.parents{cell_id} cell_id];
         end
     end
 end

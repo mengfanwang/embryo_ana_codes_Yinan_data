@@ -2,6 +2,8 @@
 % load('/work/Nova/embryo_res_folder/mengfan_data_res/view10_0530_000_191/movieInfo.mat');
 clearvars -except movieInfo embryo_vid
 load('detect_divPair.mat');
+load('detect_splitPair_processed.mat');
+detect_divPair = [detect_divPair(:,1:3); detect_splitPair];
 
 % merge devision detections to tracking results
 % case disscusion:

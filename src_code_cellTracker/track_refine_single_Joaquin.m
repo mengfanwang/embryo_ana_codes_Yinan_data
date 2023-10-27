@@ -18,10 +18,10 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(60:99);
+        timepts_to_process = generate_tps_str(0:99);
 %         timepts_to_process = generate_tps_str(121:160);
         wei_refine_res_folder = "/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Detection_view12/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0627_060_099_crop';
+        save_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0904_0_99_test';
 %         save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0323_000_014';
     end
     if ~exist(save_folder,'dir')
