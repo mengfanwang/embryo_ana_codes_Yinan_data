@@ -7,7 +7,7 @@ function tif2bdv(tif_folder_path, save_data_name, timepts_to_process, st_loc, sz
 %     tif_folder_path = '/work/Mengfan/Embryo/TM0-49/data_reg_0.25';
 %     save_data_name = '/work/Mengfan/Embryo/TM0-49/result_0.25';
 % else
-%     tif_folder_path = 'E:\Embryo\registration_temporal_data\PointReg';
+%     tif_folder_path = 'E:\Embryo\registration_temporal_data\PointReg ';
 % end
 
 %%% scaling setting %%%
@@ -87,7 +87,19 @@ for ii = 0:view_num-1
     viewSet = docNode.createElement('ViewSetup');
     id = docNode.createElement('id');
     id.appendChild(docNode.createTextNode(num2str(ii)));   % id name
+    view_size = docNode.createElement('Size');
+    view_size.appendChild(docNode.createTextNode(...
+        [num2str(x) ' ' num2str(y) ' ' num2str(z)]));
+    voxelSize = docNode.createElement('voxelSize');
+    unit = docNode.createElement('unit');
+    unit.appendChild(docNode.createTextNode('pixel')); 
+    unit_size = docNode.createElement('size');
+    unit_size.appendChild(docNode.createTextNode('1 1 1')); 
+    voxelSize.appendChild(unit);
+    voxelSize.appendChild(unit_size);
     viewSet.appendChild(id);
+    viewSet.appendChild(view_size);
+    viewSet.appendChild(voxelSize);
     viewSets.appendChild(viewSet);
 end
 seqDes.appendChild(viewSets);

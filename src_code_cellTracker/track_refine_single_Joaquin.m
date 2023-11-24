@@ -18,11 +18,11 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(0:99);
-%         timepts_to_process = generate_tps_str(121:160);
-        wei_refine_res_folder = "/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Detection_view12/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0904_0_99_test';
-%         save_folder = '/work/Nova/embryo_res_folder/mengfan_data_res/view10_0323_000_014';
+        timepts_to_process = generate_tps_str(0:200);
+%         wei_refine_res_folder = "/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Detection_view12/Wei_refine_res";
+        wei_refine_res_folder = "/work/Mengfan/Embryo/20220930_Joaquin/Detection_view9/Wei_refine_res";
+%         save_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0904_0_99_test';
+        save_folder = '/work/Mengfan/Embryo/20220930_Joaquin/Tracking/view9_1121_0_200';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -49,8 +49,8 @@ if cropped_flag
     cell_seg_res_folder = save_folder;
 else
 
-     data_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/view12';
-     cell_seg_res_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Detection_view12';
+     data_folder = '/work/Mengfan/Embryo/20220930_Joaquin/view9';
+     cell_seg_res_folder = '/work/Mengfan/Embryo/20220930_Joaquin/Detection_view9';
 
 end
 if ~exist(cell_seg_res_folder,'dir')
@@ -68,8 +68,8 @@ st_loc = [];
 sz_crop = [];
 % st_loc = [701, 361, 201]
 % sz_crop = [800, 1200, 50]
-st_loc = [901, 761, 201]
-sz_crop = [400, 400, 50]
+% st_loc = [501, 531, 111]
+% sz_crop = [800, 800, 50]
 gt_mat_org = {};
 
 % read files
@@ -165,7 +165,7 @@ g = graphPara_cell(sum(cellfun(@(x) max(x(:)), refine_res)));%1
 q = initial_q(sc_f, true);
 
 g.timepts_to_process = timepts_to_process;
-g.translation_path = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Registration';
+g.translation_path = '/work/Mengfan/Embryo/20220930_Joaquin/Registration';
 % g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear_debug';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
 g.driftInfo.batch_size = [30 30 9];

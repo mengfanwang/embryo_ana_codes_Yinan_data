@@ -2,7 +2,7 @@ clc
 % given the cell location, find the cell id and the track id
 
 % movieInfo = movieInfoAll{1};
-query = [1414.8 562.2 1];
+query = [891.158 398.53 102.5];
 [ii, track] = findPoint(query, movieInfo);
 
 

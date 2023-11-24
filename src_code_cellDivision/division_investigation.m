@@ -92,7 +92,7 @@ end
 
 %% load data
 timepts_to_process = generate_tps_str(0:191);
-data_folder = '/ssd1/Mengfan/sameViewFusion_10';
+data_folder = '/work/Mengfan/Embryo/22-01-11/sameViewFusion_10';
 sc_f = 2;
 st_loc = [];
 sz_crop = [];
