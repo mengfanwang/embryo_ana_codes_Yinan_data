@@ -20,9 +20,9 @@ if isunix
         addpath('src_code_matlab');
         timepts_to_process = generate_tps_str(0:99);
 %         wei_refine_res_folder = "/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Detection_view12/Wei_refine_res";
-        wei_refine_res_folder = "/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Detection_drosophila/Wei_refine_res";
+        wei_refine_res_folder = "/work/public/Embryo/drosophila-cell-tracking/Detection_drosophila/Wei_refine_res";
 %         save_folder = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0904_0_99_test';
-        save_folder = '/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Tracking/0103_0_99';
+        save_folder = '/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Tracking/0123_iter10_0_99_z075s15';
     end
     if ~exist(save_folder,'dir')
         mkdir(save_folder);
@@ -50,7 +50,7 @@ if cropped_flag
 else
 
      data_folder = '/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/raw_data/TIF';
-     cell_seg_res_folder = '/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Detection_drosophila';
+     cell_seg_res_folder = '/work/public/Embryo/drosophila-cell-tracking/Detection_drosophila';
 
 end
 if ~exist(cell_seg_res_folder,'dir')
@@ -197,6 +197,7 @@ end
 q.save_folder = save_folder;
 diary(fullfile(save_folder, 'log'));
 
+g.maxIter = 10;
 [movieInfo, movieInfoAll, out_refine_res, refine_resAll,...
     threshold_res, threshold_resAll] = .... 
     mcfTracking_cell(refine_res, embryo_vid, threshold_res, ...
