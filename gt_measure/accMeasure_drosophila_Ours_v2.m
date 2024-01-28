@@ -20,6 +20,7 @@ tif_num = length(tif_files);
 gt_voxIdx = cell(tif_num, 1);
 im = cell(tif_num,1);
 max_track = 3000;
+gt_flag = zeros(tif_num, max_track);
 tic;
 for tt = 1:tif_num
     tt
@@ -32,6 +33,7 @@ for tt = 1:tif_num
     for ii = 1:length(cell_ids)
         if broken_flag(cell_ids(ii)) == 0 
             gt_voxIdx{tt}{cell_ids(ii)} = find(im{tt} == cell_ids(ii));
+            gt_flag(tt, cell_ids(ii)) = 1;
         else
             im{tt}(im{tt} == cell_ids(ii)) = 0;
         end
@@ -71,10 +73,12 @@ for ii = 1:edge_num
     if mod(ii, 1000) == 0
         fprintf('%d/%d\n', ii, edge_num);
     end
+
     %%
     tt = node(edge(ii,1),3);
     parent_id = maxOverlapID(movieInfo.voxIdx{edge(ii,1)}, im{tt}, gt_voxIdx{tt});
     child_id = maxOverlapID(movieInfo.voxIdx{edge(ii,2)}, im{tt+1}, gt_voxIdx{tt+1});
+    
     %%
     detect2gt(edge(ii,1)) = parent_id;
     detect2gt(edge(ii,2)) = child_id;
@@ -88,6 +92,7 @@ for ii = 1:edge_num
         if child_id == parent_id
             tp = tp + 1;
             tp_list(ii) = 1;
+            gt_flag(tt+1, child_id) = 0;
         else
             % check division
             div_flag = 0;
@@ -102,6 +107,7 @@ for ii = 1:edge_num
             if div_flag
                 tp = tp + 1;
                 tp_list(ii) = 1;
+                gt_flag(tt+1, child_id) = 0;
                 tp_division = tp_division + 1;
             elseif ~isempty(gt_voxIdx{tt+1}{parent_id})
                 fp = fp + 1;
