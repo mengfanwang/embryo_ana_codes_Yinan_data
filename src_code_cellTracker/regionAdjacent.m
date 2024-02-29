@@ -9,8 +9,8 @@ end
 
 f1 = movieInfo.frames(r1_id);
 
-
-real_id = refine_res{f1}(movieInfo.voxIdx{r1_id}(1));
+real_id = r1_id - sum(movieInfo.n_perframe(1:f1-1));
+% real_id = refine_res{f1}(movieInfo.voxIdx{r1_id}(2));
 if r1_id ~= real_id + sum(movieInfo.n_perframe(1:f1-1))
     error('cell id is wrong!');
 end

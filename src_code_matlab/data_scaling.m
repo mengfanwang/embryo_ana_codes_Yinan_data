@@ -23,8 +23,30 @@ else
         error('must have at least one valid input');
     end
 end
+
+% general case
 ds_sz = round([h/sc_f, w/sc_f, z]);
 
+% %% specific for fused data
+% warning("This option is for fused data only. Please double-check data type.");
+% warning("Otherwise, please use gener case directly.");
+% if ~isempty(st_loc)
+%     error('This option is only for whole images.');
+% end
+% if mod(h, 2) == 1
+%     h = h - 1;
+% end
+% if mod(w, 2) == 1
+%     w = w - 1;
+% end
+% if mod(z, 2) == 1
+%     z = z - 1;
+% end
+% st_loc = [1, 1, 1];
+% end_loc = st_loc + [h, w, z] - 1;
+% ds_sz = round([h/sc_f, w/sc_f, z/sc_f]);
+
+%%
 num_files = 0;
 if ~isempty(refine_res)
     num_files = numel(refine_res);

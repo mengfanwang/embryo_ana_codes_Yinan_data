@@ -8,7 +8,7 @@ dbstop if error
 
 %% load registration info
 start_tp = 1;
-end_tp = 400;
+end_tp = 10;
 resolution = [1 1 8];
 max_dist = 50;
 size_ratio_thre = 0.8;
@@ -194,9 +194,9 @@ for tt = start_tp+1:end_tp
     boundary_label = bnd_label_new;
     cell_loc_all{tt} = [cell_loc boundary_label];
 end
-movieInfo.frames = movieInfo.frames(1:n_cumsum(end));
+movieInfo.frames = frames(1:n_cumsum(end));
 movieInfo.orgCoord = orgCoord(1:n_cumsum(end), :);
-movieInfo.track_ids = frames(1:n_cumsum(end));
+movieInfo.track_ids = movieInfo.track_ids(1:n_cumsum(end));
 movieInfo.parents = movieInfo.parents(1:n_cumsum(end));
 movieInfo.n_perframe = n_perframe;
 
