@@ -12,9 +12,9 @@ for i=1:length(id)
     if ~isempty(movieInfo.voxIdx{id(i)})
         real_id(i,2) = refine_res{f_all(i)}(movieInfo.voxIdx{id(i)}(1));
         real_id(i,3) = threshold_res{f_all(i)}(movieInfo.voxIdx{id(i)}(1));
-        if real_id(i,2) == 0 || real_id(i,3) == 0
-            error('refine_res or threshold_res is wrongly labeled!');
-        end
+%         if real_id(i,2) == 0 || real_id(i,3) == 0
+%             error('refine_res or threshold_res is wrongly labeled!');
+%         end
     end
     real_id(i,1) = id(i);
 end

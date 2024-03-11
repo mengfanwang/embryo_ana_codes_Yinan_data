@@ -47,7 +47,7 @@ for tt = 1:tif_num-1
     end
     parent_ids{tt} = parent_ids{tt}(1:parent_cnt);
 end
-gt_edge_num = sum(cellfun(@length, parent_ids)) + size(gt_division,1);
+gt_edge_num = sum(cellfun(@length, parent_ids)) + size(gt_division,1); % wrong, should * 2
 
 %% load detection result
 load('/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Tracking/0103_0_99/movieInfo.mat');

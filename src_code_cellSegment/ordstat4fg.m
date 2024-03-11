@@ -19,6 +19,7 @@ seedSz = length(find(seedRegion>0));
 lb = max(min(vidComp(fmapComp>0)), infub);
 if isempty(lb) || isempty(ub) || ub+step_i <= lb
     fg = fmapComp;
+    threshold = nan;
     return;
 end
 %validNeiMap = ~otherIdMap;

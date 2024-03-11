@@ -1,4 +1,4 @@
-% NOTE: script created 10022022 for processing Yinan's data with single
+                % NOTE: script created 10022022 for processing Yinan's data with single
 % view.
 clc;clear;dbstop if error;
 % modify term
@@ -10,16 +10,16 @@ cropped_flag = false;
 timepts_to_process = [];
 if isunix
     home_folder = fullfile('/home', getenv('USER'));
-    addpath('/home/ccwang/Dropbox/cc_ImHandle');
+    addpath('/home/mengfan/ForExecute/cc_ImHandle');
     if cropped_flag
         data_on_insync_folder = '/Insync/ccwang@vt.edu/Google Drive/Projects/embyo_analysis/data/Mengfan_data_10012022/cropped/';
         save_folder = fullfile(home_folder, data_on_insync_folder);
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(300:399);
+        timepts_to_process = generate_tps_str(000:049);
         wei_refine_res_folder = "/work/public/Embryo/Amat2014/Detection/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/0203_clip150_300_399';
+        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/000_049';
     end
     if ~exist(save_folder,'dir')    
         mkdir(save_folder);
@@ -159,7 +159,7 @@ g = graphPara_cell(sum(cellfun(@(x) max(x(:)), refine_res)));%1
 q = initial_q(sc_f, true);
 
 g.timepts_to_process = timepts_to_process;
-g.translation_path = '/work/public/Embryo/Amat2014/Registration';
+g.translation_path = '/work/public/Embryo/Amat2014/Registration2';
 % g.translation_path = '/work/Mengfan/Embryo/Registration/nonrigid_result_view11_l5_s1_linear_debug';
 g.driftInfo.grid_size = 32;    % vector numbers each dim, currently cube only
 g.driftInfo.batch_size = [30 30 8];

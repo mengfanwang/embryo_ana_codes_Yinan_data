@@ -10,7 +10,7 @@ cropped_flag = false;
 timepts_to_process = [];
 if isunix
     home_folder = fullfile('/home', getenv('USER'));
-    addpath('/home/ccwang/Dropbox/cc_ImHandle');
+    addpath('/home/mengfan/ForExecute/cc_ImHandle');
     if cropped_flag 
         data_on_insync_folder = '/Insync/ccwang@vt.edu/Google Drive/Projects/embyo_analysis/data/Mengfan_data_10012022/cropped/';
         save_folder = fullfile(home_folder, data_on_insync_folder);
@@ -224,7 +224,7 @@ if ~exist(mastodon_dir)
     mkdir(mastodon_dir);
 end
 addpath('TGMM_wrapper/');
-mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
+mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'), [2 2 2]);
 % tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
 %% stop here
 return;

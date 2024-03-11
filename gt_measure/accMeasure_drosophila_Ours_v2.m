@@ -43,7 +43,7 @@ toc
 
 %% check link num
 % can checked through v1
-gt_edge_num = 48869;
+gt_edge_num = 48869; % may wrong
 
 %% load detection result
 load('/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Tracking/0120_iter10_0_99_z075s2/movieInfo.mat');
