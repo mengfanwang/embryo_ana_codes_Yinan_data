@@ -1,4 +1,4 @@
-                % NOTE: script created 10022022 for processing Yinan's data with single
+                    % NOTE: script created 10022022 for processing Yinan's data with single
 % view.
 clc;clear;dbstop if error;
 % modify term
@@ -17,9 +17,9 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(000:049);
+        timepts_to_process = generate_tps_str(600:649);
         wei_refine_res_folder = "/work/public/Embryo/Amat2014/Detection/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/000_049';
+        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/600_649';
     end
     if ~exist(save_folder,'dir')    
         mkdir(save_folder);
@@ -223,7 +223,7 @@ if ~exist(mastodon_dir)
     mkdir(mastodon_dir);
 end
 addpath('TGMM_wrapper/');
-mat2tgmm(movieInfo, fullfile(mastodon_dir, 'tgmm_format'));
+mat2tgmm_timepts(movieInfo, fullfile(mastodon_dir, 'tgmm_format'), timepts_to_process);
 % tif2bdv(data_folder, fullfile(mastodon_dir, 'embryo_data_h5'), timepts_to_process, st_loc, sz_crop);
 %% stop here
 return;

@@ -52,9 +52,9 @@ tp = 0; fp = 0; tp_list = zeros(gt_edge_num,1);
 % fn: no nodes are matched, fn = gt_node_num - fp
 % other edges don't influence results
 for ii = 1:gt_edge_num 
-    if mod(ii, 1000) == 0
-        fprintf('Validate %d/%d cells\n', ii, gt_edge_num );
-    end
+%     if mod(ii, 1000) == 0
+%         fprintf('Validate %d/%d cells\n', ii, gt_edge_num );
+%     end
     edge_id = gt2detect(gtID2loc(gt_edge(ii,:)));
     if sum(isnan(edge_id)) == 1
         edge_id = node(edge_id(~isnan(edge_id)),1);

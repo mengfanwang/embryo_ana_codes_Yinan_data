@@ -37,7 +37,7 @@ orgCoord(1:n_cumsum(2),:) = cell_loc .* [2 2 1];
 % scatter3(cell_loc(~boundary_label,1), cell_loc(~boundary_label,2), cell_loc(~boundary_label,3).*8, 36, [0.5 0.5 0.5], '.');
 % scatter3(cell_loc(boundary_label,1), cell_loc(boundary_label,2), cell_loc(boundary_label,3).*8, 72, [0 0.4470 0.7410], '.');
 % cell_loc_0 = [cell_loc boundary_label];
-
+addpath ../src_code_matlab/
 
 
 timepts_to_process = generate_tps_str(start_tp:end_tp-1);

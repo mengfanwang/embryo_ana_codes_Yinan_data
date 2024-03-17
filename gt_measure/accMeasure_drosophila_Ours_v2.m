@@ -33,7 +33,7 @@ for tt = 1:tif_num
     for ii = 1:length(cell_ids)
         if broken_flag(cell_ids(ii)) == 0 
             gt_voxIdx{tt}{cell_ids(ii)} = find(im{tt} == cell_ids(ii));
-            gt_flag(tt, cell_ids(ii)) = 1;
+            gt_flag(tt, cell_ids(ii)) = 1;  
         else
             im{tt}(im{tt} == cell_ids(ii)) = 0;
         end
