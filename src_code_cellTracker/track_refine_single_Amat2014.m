@@ -1,4 +1,4 @@
-                    % NOTE: script created 10022022 for processing Yinan's data with single
+                            % NOTE: script created 10022022 for processing Yinan's data with single
 % view.
 clc;clear;dbstop if error;
 % modify term
@@ -17,9 +17,9 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(600:649);
+        timepts_to_process = generate_tps_str(720:769);
         wei_refine_res_folder = "/work/public/Embryo/Amat2014/Detection/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/600_649';
+        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/720_769';
     end
     if ~exist(save_folder,'dir')    
         mkdir(save_folder);

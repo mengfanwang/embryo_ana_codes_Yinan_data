@@ -2,49 +2,180 @@ clc;clear;close all;
 % stitch tracking segments
 addpath ../src_code_matlab/ ../TGMM_wrapper/
 
-%%
-files = {{'000', '049'}, {'040', '089'}};
+%% parameter setting
+files = {{'000', '049'}, {'040', '089'}, {'080', '129'}, {'120', '169'}, {'160', '209'}, ...
+            {'200', '249'}, {'240', '309'}, {'300', '399'}};
+max_dist = 100;
+resolution = [2 2 4];
+size_ratio = 1;
+max_nei = 10;
+tp_margin = 5; % overlap/2. don't use the last several files 
+
 tps = str2num(files{1}{1}):str2num(files{end}{2});
-movieInfoAll.n_perframe = zeros(length(tps),1);
-pre_tps = 0;
-max_dist = 50;
+pre_tps = -1;
 
 file_path = '/work/Mengfan/Embryo/Amat2014/Tracking';
 translation_path = '/work/public/Embryo/Amat2014/Registration_reverse2';
 [driftInfo, drift] = loadRegInfo(translation_path, tps(2:end));
 
 %%
-ss = 1;
-m1 = load(fullfile(file_path, [files{ss}{1} '_' files{ss}{2}], 'movieInfo.mat'));
-m1 = m1.movieInfo;
-m2 = load(fullfile(file_path, [files{ss+1}{1} '_' files{ss+1}{2}], 'movieInfo.mat'));
-m2 = m2.movieInfo;
+% ss = 1;
+% m1 = load(fullfile(file_path, [files{ss}{1} '_' files{ss}{2}], 'movieInfo.mat'));
+% m1 = m1.movieInfo;
+% m2 = load(fullfile(file_path, [files{ss+1}{1} '_' files{ss+1}{2}], 'movieInfo.mat'));
+% m2 = m2.movieInfo;
 
-%% stitch  two parts: check division and stitch
+%% stitch part 1: merge all files into one
 
-if pre_tps > tps(1)
-    % stitch
+movieInfoAll.n_perframe = [];
+movieInfoAll.frames = [];
+movieInfoAll.vox = {};
+movieInfoAll.voxIdx = {};
+movieInfoAll.tracks = {};
+movieInfoAll.orgCoord = [];
+movieInfoAll.xCoord = [];
+movieInfoAll.yCoord = [];
+movieInfoAll.zCoord = [];
+movieInfoAll.parents = {};
+movieInfoAll.kids = {};
+
+for ff = 1:length(files)
+    ff
+    if ff == length(files)
+        tp_margin = 0;
+    end
+load(fullfile(file_path, [files{ff}{1} '_' files{ff}{2}], 'movieInfo.mat'));
+
+% check tps to process in cur file
+tps_file = str2num(files{ff}{1}):str2num(files{ff}{2});
+if ~ismember(pre_tps+1, tps_file)
+    error('Files are not overlapped!');
 end
+frame_range = find(tps_file(1:end-tp_margin) > pre_tps);
+n_cumsum = [0; cumsum(movieInfo.n_perframe)];
 
-% try the best to find parents for every cell
-% 
-cnt = 0;
+% adjust parent kids tracks relationship
+track_remove_flag = zeros(length(movieInfo.tracks),1);
 for ii = 1:length(movieInfo.tracks)
+    remove_flag = zeros(length(movieInfo.tracks{ii}),1);
+    for jj = 1:length(movieInfo.tracks{ii})-1
+        parent = movieInfo.tracks{ii}(jj);
+        kid = movieInfo.tracks{ii}(jj+1);
+        if movieInfo.frames(parent) < frame_range(1)
+            remove_flag(jj) = 1;
+            movieInfo.parents{kid} = [];
+            movieInfo.kids{parent} = [];
+        end
+    end
+    for jj = length(movieInfo.tracks{ii}):-1:2
+        parent = movieInfo.tracks{ii}(jj-1);
+        kid = movieInfo.tracks{ii}(jj);
+        if movieInfo.frames(kid) > frame_range(end)
+            remove_flag(jj) = 1;
+            movieInfo.parents{kid} = [];
+            movieInfo.kids{parent} = [];
+        end
+    end
+    movieInfo.tracks{ii}(logical(remove_flag)) = [];
     if isempty(movieInfo.tracks{ii})
-        continue
+        track_remove_flag(ii) = 1;
     end
-    track_head = movieInfo.tracks{ii}(1);
-    if movieInfo.frames(track_head) == 1
-        continue
-    end
-    cur_tps = movieInfo.frames(track_head) - pre_tps;
-    cell_loc = movieInfo.orgCoord(track_head);
-
 end
+movieInfo.tracks(logical(track_remove_flag)) = [];
+
+
+% key info: n_perframe frames vox voxIdx tracks orgCoord x/y/zCoord parents kids
+cell_range = n_cumsum(frame_range(1))+1:n_cumsum(frame_range(end)+1);
+% correct cell index
+ind_correction = -n_cumsum(frame_range(1)) + length(movieInfoAll.voxIdx);
+for ii = 1:length(movieInfo.tracks)
+    movieInfo.tracks{ii} = movieInfo.tracks{ii} + ind_correction;
+end
+for ii = 1:length(movieInfo.voxIdx)
+    if ~isempty(movieInfo.parents{ii})
+        movieInfo.parents{ii} = movieInfo.parents{ii} + ind_correction;
+    end
+    if ~isempty(movieInfo.kids{ii})
+        movieInfo.kids{ii} = movieInfo.kids{ii} + ind_correction;
+    end
+end
+movieInfoAll.frames = [movieInfoAll.frames; movieInfo.frames(cell_range(1):cell_range(end)) - ...
+                                            frame_range(1) + length(movieInfoAll.n_perframe) + 1];
+movieInfoAll.n_perframe = [movieInfoAll.n_perframe; movieInfo.n_perframe(frame_range(1):frame_range(end))];
+movieInfoAll.vox = [movieInfoAll.vox; movieInfo.vox(cell_range(1):cell_range(end))];
+movieInfoAll.voxIdx = [movieInfoAll.voxIdx; movieInfo.voxIdx(cell_range(1):cell_range(end))];
+movieInfoAll.tracks = [movieInfoAll.tracks; movieInfo.tracks];
+movieInfoAll.orgCoord = [movieInfoAll.orgCoord; movieInfo.orgCoord(cell_range(1):cell_range(end), :)];
+movieInfoAll.xCoord = [movieInfoAll.xCoord; movieInfo.xCoord(cell_range(1):cell_range(end))];
+movieInfoAll.yCoord = [movieInfoAll.yCoord; movieInfo.yCoord(cell_range(1):cell_range(end))];
+movieInfoAll.zCoord = [movieInfoAll.zCoord; movieInfo.zCoord(cell_range(1):cell_range(end))];
+movieInfoAll.parents = [movieInfoAll.parents; movieInfo.parents(cell_range(1):cell_range(end))];
+movieInfoAll.kids = [movieInfoAll.kids; movieInfo.kids(cell_range(1):cell_range(end))];
+pre_tps = pre_tps + length(frame_range);
+end
+%% stitch part 2: try the best to find parents for every cell
+clear movieInfo
+n_cumsum = [0; cumsum(movieInfoAll.n_perframe)];
+non_assigned = zeros(length(movieInfoAll.n_perframe),1);
+for ii = 1:length(movieInfoAll.tracks)
+    if mod(ii, 1000) == 0
+        fprintf("%d/%d\n", ii, length(movieInfoAll.tracks));
+    end
+    if isempty(movieInfoAll.tracks{ii})
+        continue
+    end
+    track_head = movieInfoAll.tracks{ii}(1);
+    if movieInfoAll.frames(track_head) == 1
+        continue
+    end
+    tt = movieInfoAll.frames(track_head);
+    cell_loc = movieInfoAll.orgCoord(track_head,:);
+    cell_loc = mapCellLoc(cell_loc, tt-1, tt, driftInfo, drift);
+    dist_pair = pdist2(movieInfoAll.orgCoord(n_cumsum(tt-1)+1:n_cumsum(tt), :).*resolution, cell_loc.*resolution);
+    
+    % get neighbors and neighbor distance
+    [neighbor_dist, neighbor_candidate] = sort(dist_pair);
+    neighbor_dist = neighbor_dist(1:min(max_nei, length(dist_pair)));
+    neighbor_candidate = neighbor_candidate(1:min(max_nei, length(dist_pair)));
+    neighbors = neighbor_candidate(neighbor_dist < max_dist);
+    neighbors = neighbors + n_cumsum(tt-1);
+    dist2nei = neighbor_dist(neighbor_dist < max_dist);
+
+    % the neighbirs within distance and k-nearest are candidates
+    % then check them according to order
+    connect_flag = 0;
+    for jj = 1:length(neighbors)
+        parent = neighbors(jj);
+        parent_kids = movieInfoAll.kids{parent};
+        kid_num = length(parent_kids);
+        % if kids < 2 and one of the size < 0.8 -> connect
+        if kid_num == 2
+            continue;
+        elseif kid_num == 1
+            if min(length(movieInfoAll.voxIdx{parent_kids}) / length(movieInfoAll.voxIdx{parent}),...
+                length(movieInfoAll.voxIdx{track_head}) / length(movieInfoAll.voxIdx{parent})) < size_ratio
+                connect_flag = 1;
+            end
+        else
+            connect_flag = 1;
+        end
+        if connect_flag == 1
+            movieInfoAll.tracks{ii} = [parent; movieInfoAll.tracks{ii}];
+            movieInfoAll.parents{track_head} = parent;
+            movieInfoAll.kids{parent} = [movieInfoAll.kids{parent}; track_head];
+            break
+        end
+    end
+    if connect_flag == 0
+        non_assigned(tt) = non_assigned(tt)+1;
+    end
+end
+
+
 
 function cell_loc_new = mapCellLoc(cell_loc, start_tp, end_tp, driftInfo, drift)
     cell_loc_new = cell_loc;
-    for tt = start_tp:end_tp-1
+    for tt = end_tp:-1:start_tp
         y_bias = interp3(driftInfo.y_batch, driftInfo.x_batch, driftInfo.z_batch,...
             drift.y_grid{tt}, cell_loc_new(:,1), cell_loc_new(:,2), cell_loc_new(:,3), 'linear');
         x_bias = interp3(driftInfo.y_batch, driftInfo.x_batch, driftInfo.z_batch,...

@@ -30,7 +30,6 @@ end
 gt_division = gt_division(1:div_num, :);
 
 % %%
-% % load('drosophila_broken_tracks.mat');
 % tif_files = dir(fullfile(gt_path, '*.tif'));
 % tif_num = length(tif_files);
 % gt_voxIdx = cell(tif_num, 1);
