@@ -87,9 +87,9 @@ for ii = 0:view_num-1
     viewSet = docNode.createElement('ViewSetup');
     id = docNode.createElement('id');
     id.appendChild(docNode.createTextNode(num2str(ii)));   % id name
-    view_size = docNode.createElement('Size');
+    view_size = docNode.createElement('size');
     view_size.appendChild(docNode.createTextNode(...
-        [num2str(x) ' ' num2str(y) ' ' num2str(z)]));
+        [num2str(y) ' ' num2str(x) ' ' num2str(z)]));
     voxelSize = docNode.createElement('voxelSize');
     unit = docNode.createElement('unit');
     unit.appendChild(docNode.createTextNode('pixel')); 

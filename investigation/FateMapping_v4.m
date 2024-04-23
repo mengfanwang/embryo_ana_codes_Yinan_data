@@ -1,5 +1,5 @@
 clc;clear;close all;
-% stitch tracking segments
+% stitch tracking segments 
 addpath ../src_code_matlab/ ../TGMM_wrapper/
 
 %% parameter setting

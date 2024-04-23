@@ -3,11 +3,12 @@ addpath ../gt_measure/  ../src_code_matlab/ ../TGMM_wrapper/
 addpath /home/mengfan/ForExecute/cc_ImHandle/
 dbstop if error
 
-save_path = '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/Fusion_000_019/';
+root_path = '/work/Mengfan/Embryo/20240324 isl2bGFP H2A mCherry 30tp test';
+save_path = fullfile(root_path, 'Tracking', 'Fusion_000_030');
 
 %% load registraiton info from xml
-xml_name = "/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/20220518 isl2b H2Bmcherry overnight.xml";
-t = 20;
+xml_name = fullfile(root_path, '20240312 isl2bGFP H2AmCherry.xml');
+t = 31;
 num_view = 16;
 xml = xml2struct(xml_name);
 register_info = xml.SpimData.ViewRegistrations.ViewRegistration;
@@ -46,10 +47,10 @@ end
 % tif2bdv_globalReg_multiview(view_name, tif_folder_path, save_data_name, timepts_to_process, st_loc, sz_crop, trans);
 
 %%  mat2tgmm with registration
-movieInfo_paths = {'/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view9_0218_0_19', ...
-                   '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view10_0218_0_19', ...
-                   '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view11_0221_0_19', ...
-                   '/work/Mengfan/Embryo/20220518 isl2b H2Bmcherry overnight/Tracking/view12_0214_0_19'};
+movieInfo_paths = {fullfile(root_path, 'Tracking', 'view9_0_30'), ...
+                   fullfile(root_path, 'Tracking', 'view10_0_30'), ...
+                   fullfile(root_path, 'Tracking', 'view11_0_30'), ...
+                   fullfile(root_path, 'Tracking', 'view12_0_30')};
 xml_folder = fullfile(save_path, 'tgmm_mat');
 if ~exist(xml_folder)
     mkdir(xml_folder);
