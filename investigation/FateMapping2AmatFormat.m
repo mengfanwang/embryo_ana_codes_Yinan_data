@@ -20,7 +20,7 @@ end
 % traverse: boundary cell in 1st frame
 que = [];
 for ii = 1:movieInfo.n_perframe(1)
-    if movieInfo.zCoord(ii) >= 105
+    if movieInfo.zCoord(ii) >= 115
         que = [que; ii];
     end
 end
