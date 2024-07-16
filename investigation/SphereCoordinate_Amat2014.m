@@ -1,4 +1,7 @@
-load('tracks_stitch_100_1_10_224.mat');
+load('tracks_stitch_v4_1000.mat');
+
+% load('tracks_TGMM_720.mat');
+% tracks(:,[3 4]) = tracks(:, [4 3]);
 
 close all;
 
@@ -18,7 +21,7 @@ Z = Z * rz;
 loc_norm = (loc - [x0 y0 z0]) ./ [rx ry rz];
 phi = acos(loc_norm(:,3) ./ sqrt(loc_norm(:,1).^2 + loc_norm(:,2).^2 + loc_norm(:,3).^2));
 theta = sign(loc_norm(:,2)) .* acos(loc_norm(:,1) ./ sqrt(loc_norm(:,1).^2 + loc_norm(:,2).^2));
-lineage_num = size(loc,1);
+lineage_num = size(loc,1);      
 c = colormap('turbo');
 lineage_color = c(round(min(phi,2)/2*256),:);
 
@@ -76,7 +79,7 @@ end
     writerObj.FrameRate = 30;
     open(writerObj);
 
-for tt = 0:399
+for tt = 0:1000
     tt
 ind = find(tracks(:,8)==tt);
 

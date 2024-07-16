@@ -81,18 +81,18 @@ end
 gt_edge = gt_edge(1:edge_id, :);
 
 %% load detection result
-node_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/TGMM/MastodonTable-Spot.csv';
-edge_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/TGMM/MastodonTable-Link.csv';
+% node_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/TGMM/MastodonTable-Spot.csv';
+% edge_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/TGMM/MastodonTable-Link.csv';
 
-% node_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/Elephant/MastodonTable-Spot.csv';
-% edge_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/Elephant/MastodonTable-Link.csv';
+node_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/Elephant/MastodonTable-Spot.csv';
+edge_file = '/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/Elephant/MastodonTable-Link.csv';
 % load detection data
 % node:[id x y z t radius]
 node = readmatrix(node_file);
 node = node(3:end, [2 5 6 7 4]);
 node = [node 30*ones(size(node,1),1)];
 edge = readmatrix(edge_file);
-edge = edge(3:end, [5 4]);
+edge = edge(3:end, [4 5]);
 
 %%
 resolution = [1 1 1];

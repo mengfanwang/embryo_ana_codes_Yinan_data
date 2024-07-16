@@ -68,7 +68,8 @@ edge = edge(1:edge_num, :);
 tp = 0; fp = 0; 
 tp_division = 0;
 tp_list = zeros(edge_num,1); fp_list = zeros(edge_num, 1);
-detect2gt = zeros(node_num,1);
+detect2gt = zeros(node_num,1); 
+detect_edge = []; % for plot only
 for ii = 1:edge_num
     if mod(ii, 1000) == 0
         fprintf('%d/%d\n', ii, edge_num);
@@ -93,6 +94,7 @@ for ii = 1:edge_num
             tp = tp + 1;
             tp_list(ii) = 1;
             gt_flag(tt+1, child_id) = 0;
+            detect_edge = [detect_edge; [parent_id + (tt-1)*max_track parent_id + tt*max_track]];
         else
             % check division
             div_flag = 0;

@@ -17,18 +17,18 @@ for ii = 1:node_num
     end
 end
 
-% traverse: boundary cell in 1st frame
-que = [];
-for ii = 1:movieInfo.n_perframe(1)
-    if movieInfo.zCoord(ii) >= 115
-        que = [que; ii];
-    end
-end
-while ~isempty(que)
-    cur = que(1);
-    tracks(cur,9) = 1;
-    que = [que(2:end); movieInfo.kids{cur}];
-end
+% % traverse: boundary cell in 1st frame
+% que = [];
+% for ii = 1:movieInfo.n_perframe(1)
+%     if movieInfo.zCoord(ii) >= 115
+%         que = [que; ii];
+%     end
+% end
+% while ~isempty(que)
+%     cur = que(1);
+%     tracks(cur,9) = 1;
+%     que = [que(2:end); movieInfo.kids{cur}];
+% end
 
 % union-find: merge lineage id
 fprintf('Merge lineage id...');

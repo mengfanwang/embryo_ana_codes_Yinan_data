@@ -27,5 +27,5 @@ node = node(3:end, [2 5 6 7 4]);
 node = [node 30*ones(size(node,1),1)];
 edge = readmatrix(edge_file);
 edge = edge(3:end, [4 5]);
-[tp, fp, fn] = evaluation(gt_node, gt_edge, node, edge, resolution);
+[tp, fp, fn, tp_list] = evaluation(gt_node, gt_edge, node, edge, resolution);
 fprintf('Precision: %2.2f Recall: %2.2f Accuracy: %2.2f', tp*100/(tp+fp), tp*100/(tp+fn), tp*100/(tp+fp+fn));

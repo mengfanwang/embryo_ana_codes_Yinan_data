@@ -101,6 +101,15 @@ for ii = 1:length(movieInfo.tracks)
     end
 end
 edge = edge(1:edge_num, :);
+load('/work/Mengfan/EmbryoData_other/Fluo-N3DL-TRIF_train/02_Tracking/0208_000_079/detect_divPair');
+for ii = 1:size(detect_divPair,1)
+    if ~ismember(detect_divPair(ii,[1 2]), edge, 'rows')
+        edge = [edge; detect_divPair(ii,[1 2])];
+    end
+    if ~ismember(detect_divPair(ii,[1 3]), edge, 'rows')
+        edge = [edge; detect_divPair(ii,[1 3])];
+    end
+end
 
 %%
 resolution = [2 2 2];

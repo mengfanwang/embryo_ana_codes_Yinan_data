@@ -1,5 +1,5 @@
 clc;clear;close all;
-load('/ssd1/Mengfan/result.mat');
+load('/ssd1/Mengfan/data/result.mat');
 node = [node 30*ones(size(node,1),1)]; % manual add radius
 resolution = [1 1 5.86];
 

@@ -36,6 +36,7 @@ toc
 
 %% check link num
 parent_ids = cell(tif_num-1, 1);
+gt_edge = [];
 for tt = 1:tif_num-1
     parent_ids{tt} = zeros(length(gt_voxIdx{tt}), 1);
     parent_cnt = 0;
@@ -46,8 +47,9 @@ for tt = 1:tif_num-1
         end
     end
     parent_ids{tt} = parent_ids{tt}(1:parent_cnt);
+    gt_edge = [gt_edge; [parent_ids{tt} + (tt-1)*max_track parent_ids{tt} + tt*max_track]]; % for plotting figure
 end
-gt_edge_num = sum(cellfun(@length, parent_ids)) + size(gt_division,1); % wrong, should * 2
+gt_edge_num = sum(cellfun(@length, parent_ids)) + size(gt_division,1); 
 
 %% load detection result
 load('/work/Mengfan/EmbryoData_other/drosophila-cell-tracking/Our/Tracking/0103_0_99/movieInfo.mat');

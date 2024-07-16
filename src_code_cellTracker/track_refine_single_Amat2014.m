@@ -17,9 +17,9 @@ if isunix
     else        
     
         addpath('src_code_matlab');
-        timepts_to_process = generate_tps_str(720:769);
+        timepts_to_process = generate_tps_str(960:1000);
         wei_refine_res_folder = "/work/public/Embryo/Amat2014/Detection/Wei_refine_res";
-        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/720_769';
+        save_folder = '/work/Mengfan/Embryo/Amat2014/Tracking/960_1000_new';
     end
     if ~exist(save_folder,'dir')    
         mkdir(save_folder);
@@ -73,7 +73,7 @@ if ~isempty(timepts_to_process)
     tif_files(numel(timepts_to_process)+1:end) = [];
     for f = 1:numel(timepts_to_process)
         tif_files(f).name = timepts_to_process(f) + '.tif';
-    end
+    end         
 end
 file_num = numel(tif_files);
 % load original data and detection results and ground truth
@@ -104,11 +104,12 @@ end
 % [refine_res, ~, ~, threshold_res, ~, ~] = data_scaling(sc_f, st_loc, ...
 %     sz_crop, refine_res(1:file_num), {}, {}, threshold_res(1:file_num), {}, {});
 
-scale_term = 150;
+% scale_term = 150;
+scale_term = 300;
 embryo_vid = cell(numel(tif_files), 1); % original data
 for i=1:numel(tif_files)
     embryo_vid_temp{1} = tifread(fullfile(tif_files(i).folder, tif_files(i).name));
-    embryo_vid_temp{1}(embryo_vid_temp{1}>150) = 150;
+%     embryo_vid_temp{1}(embryo_vid_temp{1}>150) = 150;
     embryo_vid_temp{1} = 255*embryo_vid_temp{1}./scale_term;
     [~, embryo_vid_temp, ~, ~, ~, ~] = data_scaling(sc_f, st_loc, ...
     sz_crop, {}, embryo_vid_temp, {}, {}, {}, {});
