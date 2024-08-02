@@ -1,5 +1,4 @@
-                            % NOTE: script created 10022022 for processing Yinan's data with single
-% view.
+% NOTE: script created 10022022 for processing Yinan's data with single view.
 clc;clear;dbstop if error;
 % modify term
 % timepts_to_process wei_refine_res_folder save_folder 
@@ -14,8 +13,7 @@ if isunix
     if cropped_flag
         data_on_insync_folder = '/Insync/ccwang@vt.edu/Google Drive/Projects/embyo_analysis/data/Mengfan_data_10012022/cropped/';
         save_folder = fullfile(home_folder, data_on_insync_folder);
-    else        
-    
+    else           
         addpath('src_code_matlab');
         timepts_to_process = generate_tps_str(960:1000);
         wei_refine_res_folder = "/work/public/Embryo/Amat2014/Detection/Wei_refine_res";

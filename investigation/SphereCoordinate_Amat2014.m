@@ -75,9 +75,9 @@ end
 %     close(writerObj);
 %% cartesein coordinate
 
-    writerObj = VideoWriter('myVideo.avi');
-    writerObj.FrameRate = 30;
-    open(writerObj);
+%     writerObj = VideoWriter('myVideo.avi');
+%     writerObj.FrameRate = 30;
+%     open(writerObj);
 
 for tt = 0:1000
     tt
@@ -99,22 +99,23 @@ loc = loc(lineage>0,:);
 lineage = lineage(lineage>0);
 
 figure(3);
-scatter(loc(:,1), loc(:,3)*5.86+1400, 18, lineage_color(lineage,:), 'filled');
-axis([0 1800 0 1400]);
-set(gcf,'position',[100, 100, 960, 960]);
+% scatter(loc(:,1), loc(:,3)*5.86+1400, 18, lineage_color(lineage,:), 'filled');
+% axis([0 1800 0 1400]);
+% set(gcf,'position',[100, 100, 960, 960]);
+scatter(loc(:,2), -loc(:,1), 18, lineage_color(lineage,:), 'filled');
 
-    frame = getframe(gcf);
-    frame = frame.cdata;
-    if tt == 0
-        sz = size(frame);
-        sz = sz(1:2);
-    else
-        frame = imresize(frame, sz);
-    end
-
-
-    writeVideo(writerObj, frame);
+%     frame = getframe(gcf);
+%     frame = frame.cdata;
+%     if tt == 0
+%         sz = size(frame);
+%         sz = sz(1:2);
+%     else
+%         frame = imresize(frame, sz);
+%     end
+% 
+% 
+%     writeVideo(writerObj, frame);
     close all
 
 end
-    close(writerObj);
+%     close(writerObj);
