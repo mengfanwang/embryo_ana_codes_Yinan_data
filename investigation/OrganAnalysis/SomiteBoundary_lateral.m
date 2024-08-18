@@ -6,6 +6,8 @@ y = 1818;
 z = 253;
 
 load('../tracks_stitch_v4_1000.mat');
+cell_num = size(tracks,1);
+tracks(:, 10) = [1:cell_num]';
 
 channel_list = 0:8;
 name = {'All', 'Right Eye', 'Left Eye', 'Brain', 'Somite AB', 'Somite BA', 'Somite AA', 'Somite BB', 'Tail bud'};
@@ -30,12 +32,11 @@ color = [0.75 0.75 0.75;
          0.6350 0.0780 0.1840];
 
 cell_flag_list = cell(length(channel_list),1);
-for cc = 1:length(channel_list)
+for cc = 7:8
     mask = loadchannel(channel_list(cc));  
     mask = mask > 0;
     
     tracks_last = tracks(tracks(:,8) == 1000,:);
-    cell_im = zeros(x,y,z);
 
     if channel_list(cc) == 0
         cell_flag = ones(size(tracks_last,1),1);
@@ -46,21 +47,25 @@ for cc = 1:length(channel_list)
             cell_loc_y = round(tracks_last(ii,3));
             cell_loc_z = round(tracks_last(ii,5));
             if mask(cell_loc_x, cell_loc_y, cell_loc_z)
-                cell_im(cell_loc_x, cell_loc_y, cell_loc_z) = 1;
                 cell_flag(ii) = 1;
+                parent = tracks_last(ii,7);
+                while parent > 0
+                    tracks(parent,10) = tracks_last(ii,10);
+                    parent = tracks(parent,7);
+                end
             end
         end
     end
     cell_flag_list{cc} = cell_flag;
 end
 
-        writerObj = VideoWriter('myVideo.avi');
+        writerObj = VideoWriter('SomiteBoudary.avi');
         writerObj.FrameRate = 30;
         open(writerObj);
 
 for tt = 0:10:1000
 
-for cc = 1:length(channel_list)
+for cc = 7:8
     % get linegae
     select_lineage = unique(tracks_last(logical(cell_flag_list{cc}),10));
     loc = tracks(:, 3:5);
@@ -80,8 +85,9 @@ for cc = 1:length(channel_list)
 %     set(gcf,'position',[100, 100, 960, 700]);
     axis([0 1800 0 1400]);
     set(gcf,'position',[100, 100, 960, 960]);
+    text(50, 50, sprintf('T = %d', tt), 'FontSize', 18);
 end
-legend(name{channel_list+1});
+legend(name{7:8});
         frame = getframe(gcf);
         frame = frame.cdata;
         if tt == 0
