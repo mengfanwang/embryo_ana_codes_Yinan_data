@@ -61,7 +61,8 @@ for tt = 1000:-10:0
 
     % plot
     colormap(color);
-    scatter(loc(select_flag,1), loc(select_flag,3)*5.86+1400, 18, min(division_cnt(select_flag),quantile(division_cnt(select_flag), 0.98)), 'filled');
+    scatter(loc(select_flag,1), loc(select_flag,3)*5.86+1400, 18, min(division_cnt(select_flag),...
+        quantile(division_cnt(select_flag), 0.98)), 'filled');
     axis([0 1800 0 1400]);
     set(gcf,'position',[100, 100, 960, 960]);
     text(50, 50, sprintf('T = %d', tt), 'FontSize', 18);

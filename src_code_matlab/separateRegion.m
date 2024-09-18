@@ -31,7 +31,7 @@ for i=1:numel(sepReg)
     end
     cur_frame = movieInfo.frames(cur_reg);
     cur_idx = movieInfo.voxIdx{cur_reg};
-    real_id = refine_res{cur_frame}(movieInfo.voxIdx{cur_reg}(1));
+    real_id = refine_res{cur_frame}(movieInfo.voxIdx{cur_reg}(2));
     sep_frames = movieInfo.frames(sepReg{i}(2:end));
     if real_id + sum(movieInfo.n_perframe(1:cur_frame-1)) ~= cur_reg
         error('label wrong!');
